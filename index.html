@@ -202,6 +202,7 @@ body {
   <button class="tab active" onclick="goTab('datos',this)">DATOS</button>
   <button class="tab" onclick="goTab('analisis',this)">ANÁLISIS</button>
   <button class="tab" onclick="goTab('senal',this)">SEÑAL</button>
+  <button class="tab" onclick="goTab('historial',this)">HISTORIAL</button>
 </div>
 
 <div class="content">
@@ -231,30 +232,77 @@ body {
     </div>
   </div>
 
-  <!-- CYCLE PHASE CARD — always visible -->
-  <div class="cycle-card" id="cycleCard">
-    <div class="cycle-top">FASE DEL CICLO</div>
-    <div class="cycle-body">
-      <div class="cycle-emoji" id="cycleEmoji">⏳</div>
-      <div>
-        <div class="cycle-name" id="cycleName" style="color:#6a8aaa">CALCULANDO</div>
-        <div class="cycle-desc" id="cycleDesc">Introduce los datos para detectar la fase</div>
+  <!-- CYCLE ODOMETER — always visible -->
+  <div id="cycleOdometer" style="background:#071220;border:1px solid #1a3a5a;border-radius:10px;padding:16px;margin-bottom:14px;">
+
+    <!-- Top label -->
+    <div style="font-size:9px;color:#6a8aaa;letter-spacing:3px;margin-bottom:12px">CUENTAKILÓMETROS DEL CICLO</div>
+
+    <!-- Phase name + emoji -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+      <div style="font-size:36px" id="odomEmoji">⏳</div>
+      <div style="flex:1">
+        <div style="font-size:17px;font-weight:bold;letter-spacing:0.5px" id="odomName" style="color:#6a8aaa">INTRODUCE LOS DATOS</div>
+        <div style="font-size:11px;color:#8aaac8;margin-top:3px;line-height:1.5" id="odomDesc">Rellena los indicadores para ver en qué punto del ciclo estás</div>
       </div>
     </div>
-    <div class="cycle-bar-wrap">
-      <div class="cycle-bar-track">
-        <div class="cycle-seg" id="cseg1" style="background:#ff4d4d;opacity:0.3"></div>
-        <div class="cycle-seg" id="cseg2" style="background:#f5c842;opacity:0.3"></div>
-        <div class="cycle-seg" id="cseg3" style="background:#60a8ff;opacity:0.3"></div>
-        <div class="cycle-seg" id="cseg4" style="background:#00e87a;opacity:0.3"></div>
-        <div class="cycle-seg" id="cseg5" style="background:#af52de;opacity:0.3"></div>
+
+    <!-- ODOMETER TRACK -->
+    <div style="position:relative;margin-bottom:6px">
+
+      <!-- Segment track -->
+      <div style="display:flex;height:22px;border-radius:11px;overflow:hidden;gap:2px" id="odomTrack">
+        <div style="flex:1;background:rgba(255,77,77,0.25);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,0.5);font-weight:bold;letter-spacing:0.5px">BEAR</div>
+        <div style="flex:2;background:rgba(245,200,66,0.25);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,0.5);font-weight:bold;letter-spacing:0.5px">FASE 1</div>
+        <div style="flex:1.5;background:rgba(96,168,255,0.25);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,0.5);font-weight:bold;letter-spacing:0.5px">F2 INICIO</div>
+        <div style="flex:1.5;background:rgba(0,232,122,0.25);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,0.5);font-weight:bold;letter-spacing:0.5px">F2 PLENA</div>
+        <div style="flex:1.5;background:rgba(175,82,222,0.25);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,0.5);font-weight:bold;letter-spacing:0.5px">FASE 3</div>
+        <div style="flex:1;background:rgba(255,59,48,0.25);display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,0.5);font-weight:bold;letter-spacing:0.5px">DIST.</div>
       </div>
-      <div class="cycle-labels">
-        <span>Bear</span><span>Fase 1</span><span>F2 Inicio</span><span>F2 Plena</span><span>Fase 3</span>
+
+      <!-- Arrow indicator -->
+      <div id="odomArrow" style="position:absolute;top:-6px;transition:left 0.8s ease;transform:translateX(-50%);left:50%">
+        <div style="width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #f0f8ff;margin:0 auto"></div>
+        <div id="odomArrowLine" style="width:2px;height:22px;background:#f0f8ff;margin:0 auto;margin-top:-1px"></div>
+      </div>
+
+    </div>
+
+    <!-- Phase labels below track -->
+    <div style="display:flex;margin-bottom:14px;font-size:8px;color:#3a5a7a">
+      <div style="flex:1;text-align:center">🐻</div>
+      <div style="flex:2;text-align:center">₿</div>
+      <div style="flex:1.5;text-align:center">🔄</div>
+      <div style="flex:1.5;text-align:center">🚀</div>
+      <div style="flex:1.5;text-align:center">🎆</div>
+      <div style="flex:1;text-align:center">📉</div>
+    </div>
+
+    <!-- Stats row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+      <div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:8px;text-align:center">
+        <div style="font-size:9px;color:#6a8aaa;letter-spacing:1px;margin-bottom:4px">EN ESTA FASE</div>
+        <div style="font-size:20px;font-weight:900;font-family:monospace" id="odomDaysIn">—</div>
+        <div style="font-size:9px;color:#6a8aaa">días</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:8px;text-align:center">
+        <div style="font-size:9px;color:#6a8aaa;letter-spacing:1px;margin-bottom:4px">DEL CICLO</div>
+        <div style="font-size:20px;font-weight:900;font-family:monospace" id="odomProgress">—%</div>
+        <div style="font-size:9px;color:#6a8aaa">completado</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border-radius:6px;padding:8px;text-align:center">
+        <div style="font-size:9px;color:#6a8aaa;letter-spacing:1px;margin-bottom:4px">SIGUIENTE</div>
+        <div style="font-size:11px;font-weight:900" id="odomNext" style="color:#6a8aaa">—</div>
+        <div style="font-size:9px;color:#6a8aaa" id="odomNextSub">—</div>
       </div>
     </div>
-    <div class="cycle-signals" id="cycleSignals"></div>
-    <div class="cycle-next" id="cycleNext">—</div>
+
+    <!-- Key signals for current phase -->
+    <div id="odomSignals" style="display:flex;flex-direction:column;gap:4px"></div>
+
+    <!-- Action message -->
+    <div id="odomAction" style="margin-top:10px;padding:10px 12px;border-radius:6px;font-size:12px;line-height:1.6;border:1px solid #1a3a5a;background:rgba(255,255,255,0.02)"></div>
+
   </div>
 
   <!-- TAB DATOS -->
@@ -585,7 +633,28 @@ body {
 
     <button class="save-btn" onclick="saveData()">💾  GUARDAR DATOS DEL DÍA</button>
     <div class="save-ok" id="saveOk">✓ Datos guardados correctamente</div>
-    <div class="footer">TOCA ▼ EN CADA INDICADOR PARA VER RANGOS Y EXPLICACIÓN</div>
+    <!-- TAB HISTORIAL -->
+  <div id="tabHistorial" style="display:none">
+    <div class="stitle">EVOLUCIÓN DE INDICADORES CLAVE</div>
+
+    <!-- MINI CHARTS -->
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px" id="miniCharts"></div>
+
+    <!-- FASE TIMELINE -->
+    <div class="stitle">FASES DETECTADAS</div>
+    <div id="faseTimeline" style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px"></div>
+
+    <!-- DATA TABLE -->
+    <div class="stitle">REGISTRO DIARIO</div>
+    <div style="overflow-x:auto;margin-bottom:16px">
+      <table id="histTable" style="width:100%;border-collapse:collapse;font-size:10px;font-family:monospace"></table>
+    </div>
+
+    <!-- CLEAR BUTTON -->
+    <button onclick="clearHistory()" style="width:100%;padding:12px;background:rgba(255,77,77,0.08);border:1px solid rgba(255,77,77,0.25);border-radius:6px;color:#ff4d4d;font-family:inherit;font-size:12px;letter-spacing:2px;cursor:pointer;margin-bottom:8px">🗑 BORRAR HISTORIAL</button>
+  </div>
+
+  <div class="footer">TOCA ▼ EN CADA INDICADOR PARA VER RANGOS Y EXPLICACIÓN</div>
   </div>
 
   <!-- TAB ANALISIS -->
@@ -613,17 +682,6 @@ body {
 // Date
 var d = new Date();
 document.getElementById('hdate').textContent = d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
-// Tabs
-function goTab(name, btn) {
-  document.getElementById('tabDatos').style.display = name==='datos' ? 'block' : 'none';
-  document.getElementById('tabAnalisis').style.display = name==='analisis' ? 'block' : 'none';
-  document.getElementById('tabSenal').style.display = name==='senal' ? 'block' : 'none';
-  document.querySelectorAll('.tab').forEach(function(t){ t.classList.remove('active'); });
-  btn.classList.add('active');
-  if(name==='analisis') renderAnalysis();
-  if(name==='senal') renderSignal();
-}
 
 // Dropdowns
 function tog(id) {
@@ -820,8 +878,203 @@ function calc() {
   renderCyclePhase();
 }
 
-// ── CYCLE PHASE ────────────────────────────────────────────────
+// ── CYCLE ODOMETER ─────────────────────────────────────────────
 function renderCyclePhase() {
+  var ethbtc = parseFloat(document.getElementById('inpEthbtc').value) || 0;
+  var dom    = parseFloat(document.getElementById('inpDom').value)    || 0;
+  var alt    = parseFloat(document.getElementById('inpAlt').value)    || 0;
+  var etf    = parseFloat(document.getElementById('inpEtf').value)    || 999;
+  var fg     = parseFloat(document.getElementById('inpFg').value)     || 50;
+  var wh     = parseInt(document.getElementById('inpWh').value)       || 2;
+  var fed    = parseInt(document.getElementById('inpFed').value)      || 2;
+  var btc    = parseFloat(document.getElementById('inpBtc').value)    || 0;
+  var bfr    = parseFloat(document.getElementById('inpBfr').value)    || 0;
+
+  var hasData = ethbtc > 0 && dom > 0;
+  if(!hasData) return;
+
+  // ── PHASE DETECTION ──────────────────────────────────────────
+  var bearScore = 0;
+  if(etf < -300) bearScore++;
+  if(etf < -500) bearScore++;
+  if(dom > 63) bearScore++;
+  if(alt < 20) bearScore++;
+  if(fg < 20) bearScore++;
+  if(wh === 3) bearScore++;
+  if(ethbtc < 0.024) bearScore++;
+
+  var p3score = 0;
+  if(alt >= 75) p3score += 3;
+  if(dom < 52) p3score++;
+  if(ethbtc >= 0.040) p3score++;
+  if(fg >= 65) p3score++;
+
+  var p2fScore = 0;
+  if(dom < 56) p2fScore++;
+  if(ethbtc >= 0.034) p2fScore++;
+  if(alt >= 55) p2fScore++;
+  if(etf >= 200) p2fScore++;
+
+  var p2eScore = 0;
+  if(dom >= 54 && dom < 60) p2eScore++;
+  if(ethbtc >= 0.028 && ethbtc < 0.036) p2eScore++;
+  if(alt >= 38 && alt < 60) p2eScore++;
+  if(etf >= 100) p2eScore++;
+
+  var distScore = 0;
+  if(fg > 80) distScore++;
+  if(bfr > 8) distScore++;
+  if(alt >= 75 && dom < 50) distScore++;
+
+  var phase;
+  if(distScore >= 2 && p3score >= 3) phase = 'dist';
+  else if(bearScore >= 4) phase = 'bear';
+  else if(p3score >= 4) phase = 'phase3';
+  else if(p2fScore >= 3) phase = 'phase2full';
+  else if(p2eScore >= 3 && bearScore < 3) phase = 'phase2early';
+  else phase = 'phase1';
+
+  // ── PHASE CONFIG ─────────────────────────────────────────────
+  // arrowPct = position on track (0-100%)
+  // Segments: bear(0-12) | fase1(12-35) | f2init(35-55) | f2full(55-72) | fase3(72-88) | dist(88-100)
+  var PHASES = {
+    bear:       { emoji:'🐻', color:'#ff4d4d', arrowPct: 6,  progress: 5,
+      name:'BEAR MARKET',
+      desc:'El ciclo está en fase bajista. Capital saliendo. Prioridad: preservar lo invertido.',
+      daysTypical: 180, nextPhase:'₿ FASE 1',
+      action:'⚠️ No añadir posiciones. Si el bear se confirma varios días seguidos — revisar plan de salida de emergencia.',
+      signals:[
+        {lbl:'ETH/BTC', val:ethbtc.toFixed(4), ok:ethbtc>=0.028},
+        {lbl:'Dominance', val:dom.toFixed(1)+'%', ok:dom<62},
+        {lbl:'Altseason', val:alt+'/100', ok:alt>=30},
+        {lbl:'ETF Flows', val:(etf>0?'+':'')+etf+'M', ok:etf>=0}
+      ]
+    },
+    phase1:     { emoji:'₿', color:'#f5c842', arrowPct: 24, progress: 20,
+      name:'FASE 1 — BTC LIDERA',
+      desc:'Capital concentrado en Bitcoin. Las alts esperan. Fase de acumulación y paciencia.',
+      daysTypical: 270, nextPhase:'🔄 FASE 2 INICIO',
+      action:'⏳ Mantener posiciones en staking. La Fase 2 empieza cuando ETH/BTC gira al alza sostenida y Altseason supera 45. Paciencia.',
+      signals:[
+        {lbl:'ETH/BTC', val:ethbtc.toFixed(4), ok:ethbtc>=0.030},
+        {lbl:'Dominance BTC', val:dom.toFixed(1)+'%', ok:dom<60},
+        {lbl:'Altseason', val:alt+'/100', ok:alt>=40},
+        {lbl:'ETF Flows', val:(etf>0?'+':'')+etf+'M', ok:etf>=100}
+      ]
+    },
+    phase2early:{ emoji:'🔄', color:'#60a8ff', arrowPct: 45, progress: 45,
+      name:'FASE 2 INICIO — ROTACIÓN',
+      desc:'Capital empieza a rotar de BTC hacia alts. Primeras señales en ETH y alts grandes.',
+      daysTypical: 60, nextPhase:'🚀 FASE 2 PLENA',
+      action:'🎯 Momento de retirar SOL y DOT del flexible al spot. Preparar órdenes límite en TP1. La señal definitiva es que ETH/BTC supere 0.034 varios días seguidos.',
+      signals:[
+        {lbl:'ETH/BTC', val:ethbtc.toFixed(4), ok:ethbtc>=0.032},
+        {lbl:'Dominance BTC', val:dom.toFixed(1)+'%', ok:dom<58},
+        {lbl:'Altseason', val:alt+'/100', ok:alt>=50},
+        {lbl:'ETF Flows', val:(etf>0?'+':'')+etf+'M', ok:etf>=200}
+      ]
+    },
+    phase2full: { emoji:'🚀', color:'#00e87a', arrowPct: 63, progress: 65,
+      name:'FASE 2 PLENA — ALTS ACTIVAS',
+      desc:'Rotación confirmada. Alts grandes superando a BTC. Los TPs empiezan a estar en rango.',
+      daysTypical: 90, nextPhase:'🎆 FASE 3',
+      action:'⚡ Retirar TODOS los tokens del staking al spot ahora. Órdenes límite activas para TP1. Ejecutar sin dudar cuando el precio llegue.',
+      signals:[
+        {lbl:'ETH/BTC', val:ethbtc.toFixed(4), ok:ethbtc>=0.034},
+        {lbl:'Dominance BTC', val:dom.toFixed(1)+'%', ok:dom<56},
+        {lbl:'Altseason', val:alt+'/100', ok:alt>=55},
+        {lbl:'Fear & Greed', val:fg+'/100', ok:fg>=55}
+      ]
+    },
+    phase3:     { emoji:'🎆', color:'#af52de', arrowPct: 80, progress: 82,
+      name:'FASE 3 — ALTSEASON',
+      desc:'Altseason confirmada. Todo sube. Es el momento cumbre del ciclo.',
+      daysTypical: 60, nextPhase:'📉 DISTRIBUCIÓN',
+      action:'🚨 EJECUTAR TPs SIN DUDAR. En altseason todo parece que sigue subiendo — es exactamente cuando hay que vender. TP1 primero. Luego esperar TP2 y TP3.',
+      signals:[
+        {lbl:'ETH/BTC', val:ethbtc.toFixed(4), ok:ethbtc>=0.040},
+        {lbl:'Dominance BTC', val:dom.toFixed(1)+'%', ok:dom<52},
+        {lbl:'Altseason', val:alt+'/100', ok:alt>=75},
+        {lbl:'Fear & Greed', val:fg+'/100', ok:fg>=65}
+      ]
+    },
+    dist:       { emoji:'📉', color:'#ff6b35', arrowPct: 94, progress: 95,
+      name:'DISTRIBUCIÓN — SALIDA',
+      desc:'El ciclo está en su techo. Los grandes están vendiendo. Señales de salida activas.',
+      daysTypical: 45, nextPhase:'🐻 BEAR MARKET',
+      action:'🚨 VENDER TODO según el plan. No esperar más subidas. El mercado baja desde aquí. Ejecutar TPs pendientes aunque no hayan llegado al objetivo.',
+      signals:[
+        {lbl:'Fear & Greed', val:fg+'/100', ok:fg<85},
+        {lbl:'BFR Funding', val:bfr.toFixed(1), ok:bfr<8},
+        {lbl:'Altseason', val:alt+'/100', ok:alt<90},
+        {lbl:'ETF Flows', val:(etf>0?'+':'')+etf+'M', ok:etf>0}
+      ]
+    }
+  };
+
+  var ph = PHASES[phase];
+
+  // ── UPDATE ODOMETER ──────────────────────────────────────────
+
+  // Name + emoji + desc
+  document.getElementById('odomEmoji').textContent = ph.emoji;
+  var nameEl = document.getElementById('odomName');
+  nameEl.textContent = ph.name;
+  nameEl.style.color = ph.color;
+  document.getElementById('odomDesc').textContent = ph.desc;
+
+  // Arrow position
+  var arrow = document.getElementById('odomArrow');
+  arrow.style.left = ph.arrowPct + '%';
+  document.getElementById('odomArrowLine').style.background = ph.color;
+  arrow.querySelector('div').style.borderTopColor = ph.color;
+
+  // Highlight active segment
+  document.getElementById('odomTrack').innerHTML =
+    '<div style="flex:1;background:'+(phase==='bear'?'#ff4d4d':'rgba(255,77,77,0.2)')+';display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,'+(phase==='bear'?'0.9':'0.4')+');font-weight:bold;border-radius:4px;transition:all 0.4s">BEAR</div>'+
+    '<div style="flex:2;background:'+(phase==='phase1'?'#f5c842':'rgba(245,200,66,0.2)')+';display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,'+(phase==='phase1'?'0.9':'0.4')+');font-weight:bold;border-radius:4px;transition:all 0.4s">FASE 1</div>'+
+    '<div style="flex:1.5;background:'+(phase==='phase2early'?'#60a8ff':'rgba(96,168,255,0.2)')+';display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,'+(phase==='phase2early'?'0.9':'0.4')+');font-weight:bold;border-radius:4px;transition:all 0.4s">F2 INICIO</div>'+
+    '<div style="flex:1.5;background:'+(phase==='phase2full'?'#00e87a':'rgba(0,232,122,0.2)')+';display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,'+(phase==='phase2full'?'0.9':'0.4')+');font-weight:bold;border-radius:4px;transition:all 0.4s">F2 PLENA</div>'+
+    '<div style="flex:1.5;background:'+(phase==='phase3'?'#af52de':'rgba(175,82,222,0.2)')+';display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,'+(phase==='phase3'?'0.9':'0.4')+');font-weight:bold;border-radius:4px;transition:all 0.4s">FASE 3</div>'+
+    '<div style="flex:1;background:'+(phase==='dist'?'#ff6b35':'rgba(255,107,53,0.2)')+';display:flex;align-items:center;justify-content:center;font-size:7px;color:rgba(255,255,255,'+(phase==='dist'?'0.9':'0.4')+');font-weight:bold;border-radius:4px;transition:all 0.4s">DIST.</div>';
+
+  // Days in phase from history
+  var hist = getHistory();
+  var daysInPhase = 0;
+  for(var i=0; i<hist.length; i++) {
+    if(hist[i]._phase === phase) daysInPhase++;
+    else break;
+  }
+  if(daysInPhase === 0) daysInPhase = '?';
+
+  document.getElementById('odomDaysIn').textContent = daysInPhase;
+  document.getElementById('odomDaysIn').style.color = ph.color;
+  document.getElementById('odomProgress').textContent = ph.progress + '%';
+  document.getElementById('odomProgress').style.color = ph.color;
+
+  // Next phase
+  document.getElementById('odomNext').textContent = ph.nextPhase;
+  document.getElementById('odomNext').style.color = ph.color;
+  document.getElementById('odomNextSub').textContent = '~' + ph.daysTypical + ' días típico';
+
+  // Signals
+  var sigHtml = ph.signals.map(function(s){
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #0d1f30">'
+      +'<span style="font-size:11px;color:#8aaac8">'+s.lbl+'</span>'
+      +'<span style="font-size:11px;font-weight:bold;color:'+(s.ok?'#00e87a':'#ff4d4d')+'">'+s.val+' '+(s.ok?'✓':'✗')+'</span>'
+      +'</div>';
+  }).join('');
+  document.getElementById('odomSignals').innerHTML = sigHtml;
+
+  // Action
+  var actionEl = document.getElementById('odomAction');
+  actionEl.textContent = ph.action;
+  actionEl.style.borderColor = ph.color + '44';
+  actionEl.style.color = '#ddeaf8';
+
+  // Border of whole card
+  document.getElementById('cycleOdometer').style.borderColor = ph.color + '55';
+}
   var ethbtc = parseFloat(document.getElementById('inpEthbtc').value) || 0;
   var dom    = parseFloat(document.getElementById('inpDom').value)    || 0;
   var alt    = parseFloat(document.getElementById('inpAlt').value)    || 0;
@@ -957,32 +1210,6 @@ function renderCyclePhase() {
     }
   };
 
-  var ph = PHASES[phase];
-
-  // Update UI
-  document.getElementById('cycleEmoji').textContent = ph.emoji;
-  var nameEl = document.getElementById('cycleName');
-  nameEl.textContent = ph.name;
-  nameEl.style.color = ph.color;
-  document.getElementById('cycleDesc').textContent = ph.desc;
-  document.getElementById('cycleCard').style.borderColor = ph.color+'44';
-
-  // Bar segments — highlight active
-  for(var i=1;i<=5;i++){
-    var seg = document.getElementById('cseg'+i);
-    if(seg) seg.style.opacity = i===ph.seg ? '1' : '0.15';
-  }
-
-  // Signals
-  var sigHtml = ph.signals.map(function(s){
-    return '<div class="cycle-sig-row">'
-      +'<span class="cycle-sig-lbl">'+s.lbl+'</span>'
-      +'<span class="cycle-sig-val" style="color:'+(s.ok?'#00e87a':'#ff4d4d')+'">'+s.val+' '+(s.ok?'✓':'✗')+'</span>'
-      +'</div>';
-  }).join('');
-  document.getElementById('cycleSignals').innerHTML = sigHtml;
-  document.getElementById('cycleNext').textContent = ph.next;
-}
 function mkTag(text, cls) {
   var span = document.createElement('span');
   span.className = 'a-tag ' + cls;
@@ -1161,15 +1388,275 @@ function renderSignal() {
   bear.appendChild(bc);
 }
 
-// ── SAVE / LOAD ───────────────────────────────────────────────
+// ── NAVIGATION ──────────────────────────────────────────────────
+function goTab(name, btn) {
+  ['datos','analisis','senal','historial'].forEach(function(t) {
+    var el = document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1));
+    if(el) el.style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(function(b){ b.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
+  if(name === 'analisis') renderAnalysis();
+  if(name === 'senal') renderSignal();
+  if(name === 'historial') renderHistorial();
+}
+
+// ── HISTORY STORAGE ────────────────────────────────────────────
+function getHistory() {
+  try { return JSON.parse(localStorage.getItem('cDash_hist') || '[]'); }
+  catch(e) { return []; }
+}
+function saveHistory(arr) {
+  try { localStorage.setItem('cDash_hist', JSON.stringify(arr)); }
+  catch(e) {}
+}
+
 function saveData(){
+  // Save current day data
   var data = {};
   IDS.forEach(function(id){ var inp=document.getElementById('inp'+id); if(inp) data[id]=inp.value; });
   data._date = new Date().toDateString();
   localStorage.setItem('cDash_v2', JSON.stringify(data));
+
+  // Save to history
+  var hist = getHistory();
+  var today = new Date().toDateString();
+  // Remove existing entry for today if exists
+  hist = hist.filter(function(h){ return h._date !== today; });
+  // Add today's entry with phase
+  var phase = getCurrentPhase();
+  data._phase = phase;
+  data._ts = Date.now();
+  hist.unshift(data);
+  // Keep max 90 days
+  if(hist.length > 90) hist = hist.slice(0, 90);
+  saveHistory(hist);
+
   var ok = document.getElementById('saveOk');
   ok.style.display = 'block';
   setTimeout(function(){ ok.style.display='none'; }, 2500);
+}
+
+function getCurrentPhase() {
+  var ethbtc = parseFloat(document.getElementById('inpEthbtc').value) || 0;
+  var dom    = parseFloat(document.getElementById('inpDom').value)    || 0;
+  var alt    = parseFloat(document.getElementById('inpAlt').value)    || 0;
+  var etf    = parseFloat(document.getElementById('inpEtf').value)    || 999;
+  var wh     = parseInt(document.getElementById('inpWh').value)       || 2;
+
+  var bearScore = 0;
+  if(etf < -300) bearScore++;
+  if(dom > 63) bearScore++;
+  if(alt < 20) bearScore++;
+  if(wh === 3) bearScore++;
+  if(ethbtc < 0.024) bearScore++;
+
+  var p3score = 0;
+  if(alt >= 75) p3score += 3;
+  if(dom < 52) p3score++;
+  if(ethbtc >= 0.040) p3score++;
+
+  var p2fScore = 0;
+  if(dom < 56) p2fScore++;
+  if(ethbtc >= 0.034) p2fScore++;
+  if(alt >= 55) p2fScore++;
+  if(etf >= 200) p2fScore++;
+
+  var p2eScore = 0;
+  if(dom >= 54 && dom < 60) p2eScore++;
+  if(ethbtc >= 0.028 && ethbtc < 0.036) p2eScore++;
+  if(alt >= 38 && alt < 60) p2eScore++;
+  if(etf >= 100) p2eScore++;
+
+  if(bearScore >= 4) return 'bear';
+  if(p3score >= 4) return 'phase3';
+  if(p2fScore >= 3) return 'phase2full';
+  if(p2eScore >= 3 && bearScore < 3) return 'phase2early';
+  return 'phase1';
+}
+
+function clearHistory() {
+  if(confirm('¿Borrar todo el historial?')) {
+    localStorage.removeItem('cDash_hist');
+    renderHistorial();
+  }
+}
+
+// ── RENDER HISTORIAL ───────────────────────────────────────────
+function renderHistorial() {
+  var hist = getHistory();
+
+  var PHASE_NAMES = {
+    bear: {label:'🐻 BEAR', color:'#ff4d4d'},
+    phase1: {label:'₿ FASE 1', color:'#f5c842'},
+    phase2early: {label:'🔄 FASE 2 INICIO', color:'#60a8ff'},
+    phase2full: {label:'🚀 FASE 2 PLENA', color:'#00e87a'},
+    phase3: {label:'🎆 FASE 3', color:'#af52de'}
+  };
+
+  if(hist.length === 0) {
+    document.getElementById('miniCharts').innerHTML = '<div style="text-align:center;padding:24px;color:#6a8aaa;font-size:12px">Sin datos todavía. Guarda los datos diarios para ver la evolución.</div>';
+    document.getElementById('faseTimeline').innerHTML = '';
+    document.getElementById('histTable').innerHTML = '';
+    return;
+  }
+
+  // Reverse for chronological order in charts
+  var chrono = hist.slice().reverse();
+
+  // ── MINI CHARTS ───────────────────────────────────────────
+  var chartDefs = [
+    { id:'Btc', label:'BTC Precio', color:'#f7931a', unit:'$', scale: function(v){ return Math.min(100, Math.max(0, (parseFloat(v)-60000)/(200000-60000)*100)); }},
+    { id:'Dom', label:'BTC Dominance', color:'#f5c842', unit:'%', scale: function(v){ return Math.min(100, Math.max(0, 100-(parseFloat(v)-50)/20*100)); }},
+    { id:'Ethbtc', label:'ETH/BTC Ratio', color:'#627eea', unit:'', scale: function(v){ return Math.min(100, Math.max(0, (parseFloat(v)-0.020)/(0.060-0.020)*100)); }},
+    { id:'Alt', label:'Altseason Index', color:'#00e87a', unit:'/100', scale: function(v){ return Math.min(100, Math.max(0, parseFloat(v))); }},
+    { id:'Fg', label:'Fear & Greed', color:'#ff9500', unit:'/100', scale: function(v){ return Math.min(100, Math.max(0, parseFloat(v))); }},
+    { id:'Bfr', label:'Funding Rate BFR', color:'#ff4d4d', unit:'', scale: function(v){ var n=parseFloat(v); return Math.min(100, Math.max(0, (n+5)/15*100)); }}
+  ];
+
+  var chartsHtml = '';
+  chartDefs.forEach(function(cd) {
+    var vals = chrono.map(function(h){ return h[cd.id] || ''; });
+    var dates = chrono.map(function(h){
+      var d = new Date(h._date);
+      return (d.getDate())+'/'+(d.getMonth()+1);
+    });
+
+    // SVG mini chart
+    var W = 320, H = 60, pad = 8;
+    var n = vals.length;
+    if(n < 2) return;
+
+    var points = vals.map(function(v, i){
+      var x = pad + (i/(n-1)) * (W - pad*2);
+      var y = H - pad - (cd.scale(v)/100) * (H - pad*2);
+      return {x:x.toFixed(1), y:y.toFixed(1), v:v, d:dates[i]};
+    });
+
+    var polyline = points.map(function(p){ return p.x+','+p.y; }).join(' ');
+    var lastVal = vals[vals.length-1];
+    var lastScaled = cd.scale(lastVal);
+    var lastColor = lastScaled > 60 ? '#00e87a' : lastScaled > 35 ? '#f5c842' : '#ff4d4d';
+
+    // Phase background bands
+    var phaseBands = '';
+    var currentPhase = null, bandStart = pad;
+    chrono.forEach(function(h, i) {
+      var ph = h._phase || 'phase1';
+      var x = pad + (i/(n-1)) * (W - pad*2);
+      if(ph !== currentPhase) {
+        if(currentPhase !== null) {
+          var bc = {bear:'rgba(255,77,77,0.08)',phase1:'rgba(245,200,66,0.08)',phase2early:'rgba(96,168,255,0.08)',phase2full:'rgba(0,232,122,0.08)',phase3:'rgba(175,82,222,0.08)'}[currentPhase]||'transparent';
+          phaseBands += '<rect x="'+bandStart+'" y="0" width="'+(x-bandStart)+'" height="'+H+'" fill="'+bc+'"/>';
+        }
+        currentPhase = ph;
+        bandStart = x;
+      }
+    });
+    if(currentPhase) {
+      var bc2 = {bear:'rgba(255,77,77,0.08)',phase1:'rgba(245,200,66,0.08)',phase2early:'rgba(96,168,255,0.08)',phase2full:'rgba(0,232,122,0.08)',phase3:'rgba(175,82,222,0.08)'}[currentPhase]||'transparent';
+      phaseBands += '<rect x="'+bandStart+'" y="0" width="'+(W-bandStart)+'" height="'+H+'" fill="'+bc2+'"/>';
+    }
+
+    chartsHtml += '<div style="background:#071220;border:1px solid #1a3a5a;border-radius:8px;padding:12px">';
+    chartsHtml += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+    chartsHtml += '<span style="font-size:11px;font-weight:bold;color:#ddeaf8">'+cd.label+'</span>';
+    chartsHtml += '<span style="font-size:13px;font-weight:bold;font-family:monospace;color:'+lastColor+'">'+lastVal+' '+cd.unit+'</span>';
+    chartsHtml += '</div>';
+    chartsHtml += '<svg width="100%" viewBox="0 0 '+W+' '+H+'" style="overflow:visible">';
+    chartsHtml += phaseBands;
+    // Grid lines
+    chartsHtml += '<line x1="'+pad+'" y1="'+(H/2)+'" x2="'+(W-pad)+'" y2="'+(H/2)+'" stroke="#1a3a5a" stroke-width="0.5" stroke-dasharray="3,3"/>';
+    // Area fill
+    var areaPoints = points[0].x+','+(H-pad)+' '+polyline+' '+points[points.length-1].x+','+(H-pad);
+    chartsHtml += '<polygon points="'+areaPoints+'" fill="'+cd.color+'" opacity="0.1"/>';
+    // Line
+    chartsHtml += '<polyline points="'+polyline+'" fill="none" stroke="'+cd.color+'" stroke-width="2" stroke-linejoin="round"/>';
+    // Last dot
+    chartsHtml += '<circle cx="'+points[points.length-1].x+'" cy="'+points[points.length-1].y+'" r="4" fill="'+lastColor+'" stroke="#071220" stroke-width="1.5"/>';
+    // Date labels (first and last)
+    chartsHtml += '<text x="'+pad+'" y="'+(H+2)+'" fill="#3a5a7a" font-size="8">'+dates[0]+'</text>';
+    chartsHtml += '<text x="'+(W-pad)+'" y="'+(H+2)+'" fill="#3a5a7a" font-size="8" text-anchor="end">'+dates[dates.length-1]+'</text>';
+    chartsHtml += '</svg>';
+    chartsHtml += '</div>';
+  });
+
+  document.getElementById('miniCharts').innerHTML = chartsHtml || '<div style="text-align:center;padding:24px;color:#6a8aaa;font-size:12px">Necesitas al menos 2 días de datos para ver los gráficos.</div>';
+
+  // ── FASE TIMELINE ──────────────────────────────────────────
+  var faseHtml = '';
+  var phaseGroups = [];
+  var currentPh = null, phStart = null, phCount = 0;
+
+  hist.forEach(function(h, i) {
+    var ph = h._phase || 'phase1';
+    if(ph !== currentPh) {
+      if(currentPh !== null) phaseGroups.push({phase:currentPh, start:phStart, end:hist[i-1]._date, days:phCount});
+      currentPh = ph;
+      phStart = h._date;
+      phCount = 1;
+    } else {
+      phCount++;
+    }
+  });
+  if(currentPh) phaseGroups.push({phase:currentPh, start:phStart, end:hist[0]._date, days:phCount});
+
+  phaseGroups.forEach(function(g) {
+    var pd = PHASE_NAMES[g.phase] || {label:g.phase, color:'#6a8aaa'};
+    var isActive = g.end === hist[0]._date;
+    faseHtml += '<div style="background:#071220;border:1px solid '+(isActive?pd.color:'#1a3a5a')+';border-left:3px solid '+pd.color+';border-radius:6px;padding:10px 14px;'+(isActive?'box-shadow:0 0 12px '+pd.color+'22':'')+';">';
+    faseHtml += '<div style="display:flex;justify-content:space-between;align-items:center">';
+    faseHtml += '<span style="font-size:13px;font-weight:bold;color:'+pd.color+'">'+pd.label+(isActive?' <span style="font-size:9px;color:#6a8aaa">ACTUAL</span>':'')+'</span>';
+    faseHtml += '<span style="font-size:11px;font-weight:bold;color:#ddeaf8;font-family:monospace">'+g.days+' día'+(g.days>1?'s':'')+'</span>';
+    faseHtml += '</div>';
+    faseHtml += '<div style="font-size:10px;color:#6a8aaa;margin-top:4px;font-family:monospace">';
+    var ds = new Date(g.start), de = new Date(g.end);
+    faseHtml += ds.getDate()+'/'+(ds.getMonth()+1) + ' → ' + de.getDate()+'/'+(de.getMonth()+1);
+    faseHtml += '</div></div>';
+  });
+
+  document.getElementById('faseTimeline').innerHTML = faseHtml || '<div style="text-align:center;padding:16px;color:#6a8aaa;font-size:12px">Sin datos de fases todavía.</div>';
+
+  // ── DATA TABLE ─────────────────────────────────────────────
+  var tableHtml = '<thead><tr style="border-bottom:1px solid #1a3a5a">';
+  var cols = [
+    {key:'_date', label:'Fecha'},
+    {key:'_phase', label:'Fase'},
+    {key:'Btc', label:'BTC'},
+    {key:'Dom', label:'Dom%'},
+    {key:'Ethbtc', label:'ETHBTC'},
+    {key:'Alt', label:'Alt'},
+    {key:'Fg', label:'F&G'},
+    {key:'Bfr', label:'BFR'},
+    {key:'Etf', label:'ETF M$'}
+  ];
+  cols.forEach(function(c){
+    tableHtml += '<th style="padding:6px 8px;text-align:left;color:#6a8aaa;white-space:nowrap;font-size:9px;letter-spacing:1px">'+c.label+'</th>';
+  });
+  tableHtml += '</tr></thead><tbody>';
+
+  hist.forEach(function(h, i) {
+    var ph = h._phase || 'phase1';
+    var pd = PHASE_NAMES[ph] || {label:ph, color:'#6a8aaa'};
+    var isToday = i === 0;
+    tableHtml += '<tr style="border-bottom:1px solid #0d1f30;'+(isToday?'background:rgba(255,255,255,0.03)':'')+';">';
+    cols.forEach(function(c) {
+      var val = h[c.key] || '—';
+      if(c.key === '_date') {
+        var d = new Date(val);
+        val = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear().toString().slice(2);
+      }
+      if(c.key === '_phase') {
+        tableHtml += '<td style="padding:6px 8px;white-space:nowrap"><span style="font-size:9px;font-weight:bold;color:'+pd.color+'">'+pd.label+'</span></td>';
+        return;
+      }
+      if(c.key === 'Btc' && val !== '—') val = '$'+Math.round(parseFloat(val)/1000)+'K';
+      tableHtml += '<td style="padding:6px 8px;color:#8aaac8;font-size:10px;font-family:monospace;white-space:nowrap">'+val+'</td>';
+    });
+    tableHtml += '</tr>';
+  });
+  tableHtml += '</tbody>';
+  document.getElementById('histTable').innerHTML = tableHtml;
 }
 
 function loadData(){
@@ -1182,7 +1669,18 @@ function loadData(){
   } catch(e){}
 }
 
+// ── INIT ──────────────────────────────────────────────────────
+// Fix old goTab references
+var _oldGoTab = goTab;
+
 IDS.forEach(function(id){ var inp=document.getElementById('inp'+id); if(inp) inp.addEventListener('input',calc); });
+
+// Show correct tabs on load
+['tabDatos','tabAnalisis','tabSenal','tabHistorial'].forEach(function(id){
+  var el = document.getElementById(id);
+  if(el) el.style.display = id === 'tabDatos' ? 'block' : 'none';
+});
+
 loadData();
 calc();
 </script>
