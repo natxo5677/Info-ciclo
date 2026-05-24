@@ -1029,9 +1029,21 @@ function renderAnalysis() {
     else cards.push({type:'info',tags:['BFR','SANO'],text:'BFR entre 0-2 — mercado equilibrado. Apalancamiento saludable sin riesgo inmediato de liquidaciones.'});
   }
 
-  // OI
+  // TOTAL2
   var foi=parseFloat(s.Foi.v);
-  if(foi>220) cards.push({type:'bear',tags:['FUTURES OI','ALERTA'],text:'Futures OI en máximos (>220M) — apalancamiento extremo en futuros. Combinado con BFR alto, riesgo de flush importante.'});
+  if(foi>0){
+    if(foi>=1200) cards.push({type:'bull',tags:['TOTAL2','BULL RUN'],text:'TOTAL2 supera $1.2T — alts grandes incluyendo ETH en modo bull activo. El capital está rotando desde BTC hacia el resto del mercado.'});
+    else if(foi>=900) cards.push({type:'watch',tags:['TOTAL2','RECUPERANDO'],text:'TOTAL2 entre $900B-$1.2T — alts grandes recuperando. Señal de transición. Cuando supere $1.2T confirmará Fase 2 plena.'});
+    else cards.push({type:'bear',tags:['TOTAL2','DÉBIL'],text:'TOTAL2 por debajo de $900B — capital concentrado en BTC. Las alts grandes incluida ETH siguen dormidas.'});
+  }
+
+  // OTHERS
+  var poi=parseFloat(s.Poi.v);
+  if(poi>0){
+    if(poi>=300) cards.push({type:'bull',tags:['OTHERS','FASE 3'],text:'OTHERS supera $300B — el dinero retail está entrando en small caps. Señal clara de Fase 3. Tus tokens más pequeños como GRT y DOT deberían estar moviéndose.'});
+    else if(poi>=150) cards.push({type:'watch',tags:['OTHERS','DESPERTANDO'],text:'OTHERS entre $150B-$300B — small caps empezando a despertar. Señal temprana de que el capital empieza a buscar mayor riesgo y rentabilidad.'});
+    else cards.push({type:'bear',tags:['OTHERS','DORMIDO'],text:'OTHERS por debajo de $150B — small caps completamente dormidas. El retail no ha entrado todavía. Paciencia.'});
+  }
 
   // ETF
   var etf=parseFloat(s.Etf.v);
@@ -1092,9 +1104,9 @@ function renderSignal() {
 
   // Forecast
   var fc=[
-    {day:'Mañana',sig:pG>0.5?'g':pR>0.5?'r':'y',text:pG>0.5?'Continuación probable si BTC mantiene soportes.':pR>0.5?'Vigilar si BTC pierde $76K.':'Lateral sin dirección clara.'},
-    {day:'2-3 días',sig:pG>0.55?'g':pR>0.55?'r':'y',text:'Vencimiento opciones el 29 mayo puede mover el mercado. Máximo dolor ~$75K.'},
-    {day:'Próxima semana',sig:'y',text:'CLARITY Act y SWIFT junio son catalizadores clave. Vigilar ETF flows para confirmar dirección.'}
+    {day:'Mañana',sig:pG>0.5?'g':pR>0.5?'r':'y',text:pG>0.5?'Continuación probable si BTC mantiene $76K y acuerdo Irán se confirma.':pR>0.5?'Vigilar si BTC pierde $75K — soporte crítico.':'Lateral hasta que abran mercados el martes.'},
+    {day:'Martes 27 mayo',sig:'y',text:'Primer día con mercados abiertos tras fin de semana largo y acuerdo Irán. ETF flows del martes serán la señal clave — positivos confirman el movimiento.'},
+    {day:'Semana 26-30 mayo',sig:pG>0.5?'g':'y',text:'CLARITY Act voto Senado pendiente. SWIFT 25+ bancos live en junio. Warsh (nuevo Fed) puede hacer declaraciones dovish. Semana de catalizadores.'}
   ];
   document.getElementById('fcContainer').innerHTML=fc.map(function(f){
     return '<div class="fc-card"><div class="fc-day">'+f.day.toUpperCase()+'</div>'
