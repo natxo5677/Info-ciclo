@@ -409,45 +409,45 @@ body{background:#050e1a;color:#ddeaf8;font-family:'Helvetica Neue',Arial,sans-se
     </div>
   </div>
 
-  <!-- FUTURES OI -->
+  <!-- TOTAL2 -->
   <div class="ind" id="indFoi">
     <div class="ind-head" onclick="tog('Foi')">
       <div class="ind-left">
         <span class="ind-dot" id="dotFoi">⬤</span>
-        <div><div class="ind-name">FUTURES OPEN INTEREST</div><div class="ind-note" id="noteFoi">OI de futuros de BTC (en M$)</div></div>
+        <div><div class="ind-name">TOTAL2</div><div class="ind-note" id="noteFoi">Cap alts sin BTC (en B$)</div></div>
       </div>
       <div class="ind-right" onclick="event.stopPropagation()">
-        <input class="ind-inp" id="inpFoi" type="number" placeholder="248.65" step="1" oninput="calc()">
-        <span class="ind-unit">M$</span>
+        <input class="ind-inp" id="inpFoi" type="number" placeholder="998" step="1" oninput="calc()">
+        <span class="ind-unit">B$</span>
       </div>
       <span class="ind-chev" id="chevFoi">▼</span>
     </div>
     <div class="ind-drop" id="dropFoi">
-      <div class="dd-desc">Interés abierto en futuros de BTC. Alto OI con precio estancado = peligro de liquidaciones en cascada.</div>
-      <div class="dd-row"><span class="dd-dot">🟢</span><span class="dd-range">< 150M</span><span class="dd-lbl">Apalancamiento sano</span></div>
-      <div class="dd-row"><span class="dd-dot">🟡</span><span class="dd-range">150M – 220M</span><span class="dd-lbl">Vigilar — moderado</span></div>
-      <div class="dd-row"><span class="dd-dot">🔴</span><span class="dd-range">> 220M</span><span class="dd-lbl">Sobreexpuesto — riesgo liquidación</span></div>
+      <div class="dd-desc">Capitalización total de alts incluyendo ETH, sin BTC. Superar $1.2T indica que ETH y alts grandes están en bull run activo.</div>
+      <div class="dd-row"><span class="dd-dot">🟢</span><span class="dd-range">> $1.2T</span><span class="dd-lbl">Alts grandes en bull run</span></div>
+      <div class="dd-row"><span class="dd-dot">🟡</span><span class="dd-range">$900B – $1.2T</span><span class="dd-lbl">Recuperación en marcha</span></div>
+      <div class="dd-row"><span class="dd-dot">🔴</span><span class="dd-range">< $900B</span><span class="dd-lbl">Alts grandes débiles</span></div>
     </div>
   </div>
 
-  <!-- PERP OI -->
+  <!-- OTHERS -->
   <div class="ind" id="indPoi">
     <div class="ind-head" onclick="tog('Poi')">
       <div class="ind-left">
         <span class="ind-dot" id="dotPoi">⬤</span>
-        <div><div class="ind-name">PERPETUAL OPEN INTEREST</div><div class="ind-note" id="notePoi">OI de perpetuos de BTC (en B$)</div></div>
+        <div><div class="ind-name">OTHERS</div><div class="ind-note" id="notePoi">Cap small caps sin BTC/ETH/top10 (B$)</div></div>
       </div>
       <div class="ind-right" onclick="event.stopPropagation()">
-        <input class="ind-inp" id="inpPoi" type="number" placeholder="54.72" step="1" oninput="calc()">
+        <input class="ind-inp" id="inpPoi" type="number" placeholder="194" step="1" oninput="calc()">
         <span class="ind-unit">B$</span>
       </div>
       <span class="ind-chev" id="chevPoi">▼</span>
     </div>
     <div class="ind-drop" id="dropPoi">
-      <div class="dd-desc">Interés abierto en contratos perpetuos de BTC. Indica nivel de apalancamiento en el mercado de derivados.</div>
-      <div class="dd-row"><span class="dd-dot">🟢</span><span class="dd-range">< 40B</span><span class="dd-lbl">Apalancamiento controlado</span></div>
-      <div class="dd-row"><span class="dd-dot">🟡</span><span class="dd-range">40B – 65B</span><span class="dd-lbl">Moderado — vigilar junto al BFR</span></div>
-      <div class="dd-row"><span class="dd-dot">🔴</span><span class="dd-range">> 65B</span><span class="dd-lbl">Apalancamiento extremo</span></div>
+      <div class="dd-desc">Cap de small caps excluyendo BTC, ETH y las 10 grandes. Cuando supera $300B el dinero retail está entrando en alts pequeñas — señal de Fase 3.</div>
+      <div class="dd-row"><span class="dd-dot">🟢</span><span class="dd-range">> $300B</span><span class="dd-lbl">Retail en alts — Fase 3 activa</span></div>
+      <div class="dd-row"><span class="dd-dot">🟡</span><span class="dd-range">$150B – $300B</span><span class="dd-lbl">Small caps recuperando</span></div>
+      <div class="dd-row"><span class="dd-dot">🔴</span><span class="dd-range">< $150B</span><span class="dd-lbl">Small caps dormidas</span></div>
     </div>
   </div>
 
@@ -665,8 +665,8 @@ function getSig(id, v) {
   if(id==='M2')     return n>=22.5?'g':n>=21.5?'y':'r';
   if(id==='Oil')    return n<80?'g':n<100?'y':'r';
   if(id==='Bfr')    return n<0?'y':n<=2?'g':n<=5?'y':'r';
-  if(id==='Foi')    return n<150?'g':n<220?'y':'r';
-  if(id==='Poi')    return n<40?'g':n<65?'y':'r';
+  if(id==='Foi')    return n>=1200?'g':n>=900?'y':'r';
+  if(id==='Poi')    return n>=300?'g':n>=150?'y':'r';
   if(id==='Fg')     return n<=25?'g':n<=75?'y':'r';
   if(id==='Alt')    return n>=75?'g':n>=50?'y':'r';
   if(id==='Etf')    return n>=300?'g':n>=0?'y':'r';
@@ -725,14 +725,14 @@ function getNote(id, v) {
     return 'BFR extremo — liquidación inminente';
   }
   if(id==='Foi'){
-    if(n<150) return 'OI sano — apalancamiento controlado';
-    if(n<220) return 'OI moderado — vigilar junto al BFR';
-    return 'OI muy alto — riesgo de flush';
+    if(n>=1200) return 'TOTAL2 >$1.2T — alts grandes en bull run activo';
+    if(n>=900)  return 'TOTAL2 recuperando — alts grandes en movimiento';
+    return 'TOTAL2 débil — capital concentrado en BTC';
   }
   if(id==='Poi'){
-    if(n<40) return 'Perpetuos controlados';
-    if(n<65) return 'Moderado — vigilar junto al funding';
-    return 'Apalancamiento extremo en perpetuos';
+    if(n>=300) return 'OTHERS >$300B — retail en small caps. Fase 3 activa';
+    if(n>=150) return 'OTHERS recuperando — small caps despertando';
+    return 'OTHERS dormido — small caps sin movimiento';
   }
   if(id==='Fg'){
     if(n<=25)  return 'Miedo extremo — posible oportunidad';
