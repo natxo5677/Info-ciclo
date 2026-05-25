@@ -237,6 +237,15 @@ body{background:#050e1a;color:#ddeaf8;font-family:'Helvetica Neue',Arial,sans-se
     </div>
     <div class="odom-sigs" id="odomSigs"></div>
     <div class="odom-action" id="odomAction"></div>
+
+    <!-- CONFIRMACIÓN DE FASE -->
+    <div style="margin-top:12px;border-top:1px solid #0d1f30;padding-top:12px">
+      <div style="font-size:8px;letter-spacing:2px;color:#3a6a9a;margin-bottom:8px">CONFIRMACIÓN HISTÓRICA</div>
+      <div id="confirmPanel" style="display:flex;flex-direction:column;gap:5px"></div>
+      <div id="confirmVerdict" style="margin-top:10px;padding:8px 12px;border-radius:6px;font-size:11px;line-height:1.5;border:1px solid #1a3a5a;background:rgba(255,255,255,.02)">
+        Guarda al menos 2 días para ver la confirmación histórica
+      </div>
+    </div>
   </div>
 
   <div class="stitle">TUS CHARTS — TRADINGVIEW</div>
@@ -613,6 +622,9 @@ body{background:#050e1a;color:#ddeaf8;font-family:'Helvetica Neue',Arial,sans-se
   <div class="stitle">FASES DETECTADAS</div>
   <div id="faseTimeline"><div class="a-empty">Sin fases detectadas todavía</div></div>
 
+  <div class="stitle">CONFIRMACIÓN DE SEÑALES</div>
+  <div id="histConfirm"></div>
+
   <div class="stitle">REGISTRO DIARIO</div>
   <div class="hist-table-wrap">
     <table class="hist-table" id="histTable">
@@ -969,6 +981,7 @@ function saveData() {
   hist.unshift(data);
   if(hist.length>90)hist=hist.slice(0,90);
   saveHistory(hist);
+  renderConfirmation();
 
   var ok=document.getElementById('saveOk');
   ok.style.display='block';
@@ -1241,6 +1254,120 @@ function renderHistorial() {
     }).join('')+'</tr>';
   }).join('')+'</tbody>';
   document.getElementById('histTable').innerHTML=thead+tbody;
+
+  // Trigger confirmation render
+  renderConfirmation();
+}
+
+// ── CONFIRMACIÓN HISTÓRICA ────────────────────────────────────
+function renderConfirmation(){
+  var hist=getHistory();
+
+  var CRITERIA=[
+    {id:'dom',   label:'BTC Dominance < 60%', needed:3, bear:false,
+     check:function(h){var v=parseFloat(h.Dom);return v>0&&v<60;},
+     hint:'< 60% durante 3 días → Rotación iniciada'},
+    {id:'ethbtc',label:'ETH/BTC > 0.028',     needed:3, bear:false,
+     check:function(h){var v=parseFloat(h.Ethbtc);return v>=0.028;},
+     hint:'> 0.028 durante 3 días → Capital rotando hacia alts'},
+    {id:'total2',label:'TOTAL2 sobre $1T',     needed:2, bear:false,
+     check:function(h){var v=parseFloat(h.Foi);return v>=1000;},
+     hint:'> $1T durante 2 días → Alts grandes en movimiento'},
+    {id:'alt',   label:'Altseason > 40',       needed:3, bear:false,
+     check:function(h){var v=parseFloat(h.Alt);return v>=40;},
+     hint:'> 40 durante 3 días → Altseason despertando'},
+    {id:'oil',   label:'Oil Brent < $95',      needed:3, bear:false,
+     check:function(h){var v=parseFloat(h.Oil);return v>0&&v<95;},
+     hint:'< $95 durante 3 días → Macro muy favorable'},
+    {id:'bfr',   label:'BFR zona sana (0-4)',  needed:2, bear:false,
+     check:function(h){var v=parseFloat(h.Bfr);return !isNaN(v)&&v>=0&&v<=4;},
+     hint:'0-4 durante 2 días → Sin riesgo de liquidación'},
+    {id:'bear1', label:'ETF Flows negativos',  needed:3, bear:true,
+     check:function(h){var v=parseFloat(h.Etf);return !isNaN(v)&&v<-200;},
+     hint:'< -200M durante 3 días → ⚠️ Institucionales saliendo'},
+    {id:'bear2', label:'BTC bajo $75K',        needed:3, bear:true,
+     check:function(h){var v=parseFloat(h.Btc);return v>0&&v<75000;},
+     hint:'< $75K durante 3 días → ⚠️ Soporte crítico perdido'}
+  ];
+
+  var results=CRITERIA.map(function(c){
+    var streak=0;
+    for(var i=0;i<hist.length;i++){if(c.check(hist[i]))streak++;else break;}
+    var confirmed=streak>=c.needed;
+    var pct=Math.min(100,Math.round(streak/c.needed*100));
+    return{id:c.id,label:c.label,streak:streak,needed:c.needed,confirmed:confirmed,pct:pct,hint:c.hint,bear:c.bear};
+  });
+
+  var bullR=results.filter(function(r){return !r.bear;});
+  var bearR=results.filter(function(r){return r.bear;});
+  var confirmedBull=bullR.filter(function(r){return r.confirmed;}).length;
+  var confirmedBear=bearR.filter(function(r){return r.confirmed;}).length;
+  var partialBull=bullR.filter(function(r){return r.pct>=50&&!r.confirmed;}).length;
+
+  // Mini panel in odometer (compact)
+  var cpEl=document.getElementById('confirmPanel');
+  if(cpEl){
+    if(hist.length<2){
+      cpEl.innerHTML='<div style="font-size:10px;color:#3a6a9a">Guarda al menos 2 días para ver la confirmación</div>';
+    } else {
+      var cHtml=bullR.map(function(r){
+        var col=r.confirmed?'#00e87a':r.pct>=50?'#f5c842':'#3a6a9a';
+        var icon=r.confirmed?'✅':r.pct>=50?'⚡':'○';
+        return '<div style="display:flex;align-items:center;gap:6px">'
+          +'<span style="font-size:10px;width:14px">'+icon+'</span>'
+          +'<span style="font-size:9px;color:#8aaac8;flex:1">'+r.label+'</span>'
+          +'<span style="font-size:9px;font-weight:700;font-family:monospace;color:'+col+'">'+r.streak+'/'+r.needed+'d</span>'
+          +'</div>';
+      }).join('');
+      cpEl.innerHTML=cHtml;
+    }
+  }
+
+  // Verdict in odometer
+  var verdict='',vc='#3a6a9a',vbg='rgba(255,255,255,.02)',vb='#1a3a5a';
+  if(hist.length<2){
+    verdict='Guarda al menos 2 días para ver la confirmación histórica';
+  } else if(confirmedBear>=2){
+    verdict='🔴 ALERTA BEAR CONFIRMADA — '+confirmedBear+' señales bajistas sostenidas varios días. Revisar plan de salida urgente.';
+    vc='#ff4d4d';vbg='rgba(255,77,77,.06)';vb='rgba(255,77,77,.3)';
+  } else if(confirmedBull>=4){
+    verdict='🚀 CAMBIO A FASE 2 CONFIRMADO — '+confirmedBull+'/6 criterios cumplidos durante días consecutivos. Actuar: retirar SOL y DOT del staking al spot ahora.';
+    vc='#00e87a';vbg='rgba(0,232,122,.06)';vb='rgba(0,232,122,.3)';
+  } else if(confirmedBull>=2||partialBull>=3){
+    verdict='⚡ TRANSICIÓN EN PROCESO — '+confirmedBull+' señales confirmadas, '+partialBull+' a mitad de camino. Vigilar sin actuar. Si se mantiene 2-3 días más → cambio de fase inminente.';
+    vc='#f5c842';vbg='rgba(245,200,66,.06)';vb='rgba(245,200,66,.3)';
+  } else {
+    verdict='⏳ FASE 1 CONFIRMADA — Sin señales de cambio sostenido. Un día positivo no confirma nada. Mantener en staking y seguir monitorizando cada día.';
+    vc='#8aaac8';
+  }
+  var vEl=document.getElementById('confirmVerdict');
+  if(vEl){vEl.textContent=verdict;vEl.style.color=vc;vEl.style.background=vbg;vEl.style.borderColor=vb;}
+
+  // Full detail in historial tab
+  var hcEl=document.getElementById('histConfirm');
+  if(!hcEl||hist.length<2)return;
+  var fullHtml='<div style="font-size:8px;letter-spacing:2px;color:#3a6a9a;padding:0 16px 8px">CONFIRMACIÓN DE SEÑALES</div>';
+  [
+    {title:'SEÑALES DE FASE 2 — necesitan días consecutivos',items:bullR},
+    {title:'ALERTAS BEAR — señales de peligro',items:bearR}
+  ].forEach(function(g){
+    fullHtml+='<div style="font-size:8px;letter-spacing:1.5px;color:#3a6a9a;padding:0 16px 6px;margin-top:8px">'+g.title+'</div>';
+    g.items.forEach(function(r){
+      var col=r.confirmed?'#00e87a':r.pct>=50?'#f5c842':'#3a6a9a';
+      var icon=r.confirmed?'✅':r.pct>=50?'⚡':'○';
+      fullHtml+='<div style="background:#071220;border:1px solid '+(r.confirmed?col+'55':'#0d1f30')+';border-radius:8px;padding:10px 12px;margin:0 16px 6px">';
+      fullHtml+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">';
+      fullHtml+='<span>'+icon+'</span>';
+      fullHtml+='<span style="font-size:11px;font-weight:700;color:#ddeaf8;flex:1">'+r.label+'</span>';
+      fullHtml+='<span style="font-size:11px;font-weight:900;font-family:monospace;color:'+col+'">'+r.streak+'/'+r.needed+' días</span>';
+      fullHtml+='</div>';
+      fullHtml+='<div style="height:4px;background:#0d1f30;border-radius:2px;overflow:hidden;margin-bottom:5px">';
+      fullHtml+='<div style="height:100%;width:'+r.pct+'%;background:'+col+';border-radius:2px"></div></div>';
+      fullHtml+='<div style="font-size:9px;color:#3a6a9a">'+r.hint+'</div>';
+      fullHtml+='</div>';
+    });
+  });
+  hcEl.innerHTML=fullHtml;
 }
 
 // INIT
