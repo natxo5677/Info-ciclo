@@ -19,26 +19,22 @@
   --r:#ff4d4d;--rbg:rgba(255,77,77,.07);--rbdr:rgba(255,77,77,.2);
   --y:#f5c842;--ybg:rgba(245,200,66,.07);--ybdr:rgba(245,200,66,.2);
   --b:#4d8aff;--bbg:rgba(77,138,255,.07);--bbdr:rgba(77,138,255,.2);
-  --p:#af52de;
 }
 body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-height:100vh;padding-bottom:90px}
-.mono{font-family:'Space Mono',monospace}
 .app{max-width:430px;margin:0 auto}
 
 /* HEADER */
 .hdr{padding:16px 16px 12px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;background:rgba(5,10,20,.96);backdrop-filter:blur(20px)}
-.hdr-brand{font-size:8px;letter-spacing:4px;color:var(--txt3);margin-bottom:6px;font-weight:700}
+.hdr-brand{font-size:8px;letter-spacing:4px;color:var(--txt3);margin-bottom:6px;font-weight:700;text-transform:uppercase}
 .hdr-main{display:flex;justify-content:space-between;align-items:flex-start}
-.hdr-title{font-size:18px;font-weight:900;letter-spacing:-.3px}
+.hdr-title{font-size:17px;font-weight:900}
 .hdr-date{font-size:9px;color:var(--txt3);margin-top:3px}
-.hdr-right{text-align:right}
-.auto-badge{display:inline-flex;align-items:center;gap:4px;font-size:8px;font-weight:700;padding:3px 8px;border-radius:10px;letter-spacing:.5px}
-.auto-badge.live{background:var(--gbg);color:var(--g);border:1px solid var(--gbdr)}
-.auto-badge.loading{background:var(--bbg);color:var(--b);border:1px solid var(--bbdr)}
-.auto-badge.err{background:var(--rbg);color:var(--r);border:1px solid var(--rbdr)}
-.hdr-lastup{font-size:8px;color:var(--txt3);margin-top:4px;font-family:'Space Mono',monospace}
-.pulse{width:6px;height:6px;border-radius:50%;background:var(--g);animation:pulse 1.8s infinite;display:inline-block}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,232,122,.5)}70%{box-shadow:0 0 0 6px rgba(0,232,122,0)}100%{box-shadow:0 0 0 0 rgba(0,232,122,0)}}
+.live-pill{display:inline-flex;align-items:center;gap:4px;font-size:8px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:5px;letter-spacing:.5px}
+.live-pill.on{background:var(--gbg);color:var(--g);border:1px solid var(--gbdr)}
+.live-pill.off{background:var(--bg4);color:var(--txt3);border:1px solid var(--border2)}
+.live-pill.loading{background:var(--bbg);color:var(--b);border:1px solid var(--bbdr)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--g);animation:dp 1.8s infinite;display:inline-block}
+@keyframes dp{0%{box-shadow:0 0 0 0 rgba(0,232,122,.5)}70%{box-shadow:0 0 0 5px rgba(0,232,122,0)}100%{box-shadow:0 0 0 0 rgba(0,232,122,0)}}
 
 /* TABS */
 .tabs{display:flex;gap:3px;padding:10px 12px;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
@@ -49,10 +45,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 .slbl{font-size:8px;letter-spacing:3px;color:var(--txt3);padding:16px 16px 8px;text-transform:uppercase;font-weight:700}
 
 /* SEMAPHORE */
-.sem-card{margin:12px 16px;border-radius:12px;padding:16px;border:1px solid var(--border2);background:var(--bg2);transition:all .4s}
-.sem-card.green{border-color:var(--gbdr);background:var(--gbg)}
-.sem-card.yellow{border-color:var(--ybdr);background:var(--ybg)}
-.sem-card.red{border-color:var(--rbdr);background:var(--rbg)}
+.sem{margin:12px 16px;border-radius:12px;padding:16px;border:1px solid var(--border2);background:var(--bg2);transition:all .4s}
+.sem.green{border-color:var(--gbdr);background:var(--gbg)}
+.sem.yellow{border-color:var(--ybdr);background:var(--ybg)}
+.sem.red{border-color:var(--rbdr);background:var(--rbg)}
 .sem-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .sem-emoji{font-size:34px}
 .sem-label{font-size:17px;font-weight:900}
@@ -61,11 +57,11 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 .bar-g{background:var(--g);border-radius:3px;transition:flex .5s;min-width:0}
 .bar-y{background:var(--y);border-radius:3px;transition:flex .5s;min-width:0}
 .bar-r{background:var(--r);border-radius:3px;transition:flex .5s;min-width:0}
-.bar-labels{display:flex;justify-content:space-between;font-size:9px;font-family:'Space Mono',monospace}
+.bar-labs{display:flex;justify-content:space-between;font-size:9px;font-family:'Space Mono',monospace}
 
 /* ODOMETER */
 .odom{margin:0 16px 14px;background:var(--bg2);border:1px solid var(--border2);border-radius:12px;padding:14px;transition:border-color .4s}
-.odom-top{font-size:8px;color:var(--txt3);letter-spacing:3px;margin-bottom:10px;font-weight:700}
+.odom-top{font-size:8px;color:var(--txt3);letter-spacing:3px;margin-bottom:10px;font-weight:700;text-transform:uppercase}
 .odom-hero{display:flex;align-items:center;gap:12px;margin-bottom:12px}
 .odom-emoji{font-size:30px}
 .odom-name{font-size:14px;font-weight:900}
@@ -74,30 +70,45 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 .odom-seg{display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;color:rgba(255,255,255,.5);border-radius:3px}
 .odom-phase-icons{display:flex;font-size:10px;margin-bottom:12px}
 .odom-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
-.odom-stat{background:rgba(255,255,255,.03);border-radius:6px;padding:8px;text-align:center}
-.os-lbl{font-size:7px;color:var(--txt3);letter-spacing:1px;margin-bottom:3px;font-weight:700}
+.os{background:rgba(255,255,255,.03);border-radius:6px;padding:8px;text-align:center}
+.os-lbl{font-size:7px;color:var(--txt3);letter-spacing:1px;margin-bottom:3px;font-weight:700;text-transform:uppercase}
 .os-val{font-size:18px;font-weight:900;font-family:'Space Mono',monospace}
 .os-sub{font-size:8px;color:var(--txt3)}
 .odom-action{padding:10px 12px;border-radius:8px;font-size:10px;line-height:1.6;border:1px solid var(--border2);color:var(--txt2);background:rgba(255,255,255,.02)}
 
-/* AUTO INDICATORS */
-.auto-section{margin:0 16px 8px;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
-.auto-sec-hdr{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border)}
-.auto-sec-title{font-size:8px;font-weight:700;letter-spacing:2px;color:var(--txt3)}
-.auto-sec-badge{font-size:8px;font-weight:700;padding:2px 7px;border-radius:5px}
+/* BE TOKENS GRID */
+.be-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 8px 0}
+.be-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px 11px}
+.be-sym{font-size:12px;font-weight:900;margin-bottom:2px}
+.be-price{font-size:9px;font-family:'Space Mono',monospace;color:var(--txt2)}
+.be-pnl{font-size:11px;font-weight:700;font-family:'Space Mono',monospace;margin-top:2px}
+.be-track{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-top:5px}
+.be-fill{height:100%;border-radius:2px;transition:width .6s}
+
+/* ALERT BANNER */
+.alert{margin:0 16px 10px;padding:10px 14px;border-radius:8px;font-size:11px;font-weight:700;line-height:1.5;display:none}
+.alert.show{display:block}
+.alert.warn{background:var(--ybg);border:1px solid var(--ybdr);color:var(--y)}
+.alert.danger{background:var(--rbg);border:1px solid var(--rbdr);color:var(--r)}
+.alert.good{background:var(--gbg);border:1px solid var(--gbdr);color:var(--g)}
+
+/* AUTO SECTION */
+.auto-card{margin:0 16px 8px;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.auto-card-hdr{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border)}
+.auto-card-lbl{font-size:8px;font-weight:700;letter-spacing:2px;color:var(--txt3);text-transform:uppercase}
 .auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
 .auto-cell{background:var(--bg2);padding:10px 14px}
-.ac-lbl{font-size:8px;color:var(--txt3);font-weight:700;letter-spacing:1px;margin-bottom:4px}
+.ac-lbl{font-size:8px;color:var(--txt3);font-weight:700;letter-spacing:1px;margin-bottom:4px;text-transform:uppercase}
 .ac-val{font-size:15px;font-weight:900;font-family:'Space Mono',monospace}
 .ac-ch{font-size:9px;margin-top:2px;font-family:'Space Mono',monospace;font-weight:700}
 .ac-sig{font-size:8px;font-weight:700;margin-top:3px}
 
-/* MANUAL INDICATORS */
+/* INDICATORS */
 .ind{background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin:0 16px 8px;overflow:hidden;transition:border-color .3s}
 .ind.g{border-color:var(--gbdr)}.ind.y{border-color:var(--ybdr)}.ind.r{border-color:var(--rbdr)}
 .ind-head{display:flex;align-items:center;padding:12px 14px;gap:10px;cursor:pointer}
 .ind-left{display:flex;align-items:center;gap:10px;flex:1}
-.ind-dot{font-size:11px;flex-shrink:0;transition:color .3s}
+.ind-dot{font-size:11px;flex-shrink:0}
 .ind-dot.g{color:var(--g)}.ind-dot.y{color:var(--y)}.ind-dot.r{color:var(--r)}
 .ind-name{font-size:12px;font-weight:700}
 .ind-note{font-size:9px;color:var(--txt3);margin-top:2px}
@@ -107,18 +118,18 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 .ind-inp.y{border-color:var(--ybdr);color:var(--y)}
 .ind-inp.r{border-color:var(--rbdr);color:var(--r)}
 .ind-inp:focus{outline:none;border-color:var(--b)}
-.ind-unit{font-size:10px;color:var(--txt3);width:14px}
+.ind-unit{font-size:10px;color:var(--txt3);width:16px}
 .ind-chev{font-size:9px;color:var(--txt3);transition:transform .3s;flex-shrink:0}
 .ind-chev.open{transform:rotate(180deg)}
 .ind-drop{display:none;padding:10px 14px 12px;border-top:1px solid var(--border)}
 .ind-drop.open{display:block}
 .dd-desc{font-size:10px;color:var(--txt3);line-height:1.6;margin-bottom:8px}
 .dd-row{display:flex;align-items:center;gap:8px;margin-bottom:4px}
-.dd-range{font-size:9px;font-family:'Space Mono',monospace;color:var(--txt2);width:110px}
+.dd-range{font-size:9px;font-family:'Space Mono',monospace;color:var(--txt2);width:110px;flex-shrink:0}
 .dd-lbl{font-size:9px;color:var(--txt3)}
 
 /* SAVE */
-.save-btn{display:block;width:calc(100% - 32px);margin:14px 16px 6px;padding:14px;background:#1a3a5a;border:1px solid #2a5a8a;border-radius:8px;color:var(--txt);font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;font-family:'Syne',sans-serif;transition:all .2s}
+.save-btn{display:block;width:calc(100% - 32px);margin:14px 16px 6px;padding:14px;background:#1a3a5a;border:1px solid #2a5a8a;border-radius:8px;color:var(--txt);font-size:12px;font-weight:700;letter-spacing:2px;cursor:pointer;font-family:'Syne',sans-serif;text-align:center}
 .save-btn:active{background:#2a5a8a}
 .save-ok{display:none;text-align:center;font-size:10px;color:var(--g);padding:6px;letter-spacing:1px;margin-bottom:8px}
 
@@ -136,7 +147,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 .sig-action{font-size:16px;font-weight:900;margin-bottom:8px}
 .sig-text{font-size:11px;color:var(--txt2);line-height:1.6}
 .fc-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin:0 16px 8px}
-.fc-day{font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:1px;margin-bottom:4px}
+.fc-day{font-size:9px;font-weight:700;color:var(--txt3);letter-spacing:1px;margin-bottom:4px;text-transform:uppercase}
 .fc-sig{display:inline-block;font-size:11px;font-weight:800;padding:2px 9px;border-radius:8px;margin-bottom:5px}
 .fc-sig.g{background:var(--gbg);color:var(--g)}.fc-sig.y{background:var(--ybg);color:var(--y)}.fc-sig.r{background:var(--rbg);color:var(--r)}
 .fc-text{font-size:10px;color:var(--txt2);line-height:1.6}
@@ -144,22 +155,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 .bear-lbl{font-size:10px;color:var(--txt2);flex:1}
 .bear-val{font-size:10px;font-weight:700;font-family:'Space Mono',monospace}
 
-/* TOKENS BE STATUS */
-.be-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 16px 14px}
-.be-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
-.be-sym{font-size:12px;font-weight:900;margin-bottom:3px}
-.be-price{font-size:10px;font-family:'Space Mono',monospace;color:var(--txt2)}
-.be-pnl{font-size:11px;font-weight:700;font-family:'Space Mono',monospace;margin-top:3px}
-.be-bar-wrap{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-top:5px}
-.be-bar{height:100%;border-radius:2px;transition:width .6s}
-
 /* CONFIRMATION */
 .conf-row{display:flex;align-items:center;gap:8px;padding:8px 14px;border-bottom:1px solid var(--border)}
 .conf-row:last-child{border:none}
-.conf-icon{font-size:12px;width:16px;flex-shrink:0}
 .conf-lbl{font-size:10px;color:var(--txt2);flex:1}
 .conf-streak{font-size:10px;font-weight:700;font-family:'Space Mono',monospace}
-.conf-bar-wrap{width:60px;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.conf-bar-wrap{width:55px;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
 .conf-bar{height:100%;border-radius:2px;transition:width .5s}
 
 /* HISTORY */
@@ -168,15 +169,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 .hist-table{width:100%;border-collapse:collapse;font-size:9px}
 .hist-table th{padding:6px 8px;text-align:left;color:var(--txt3);font-size:8px;letter-spacing:1px;border-bottom:1px solid var(--border2);white-space:nowrap;font-weight:700}
 .hist-table td{padding:6px 8px;color:var(--txt2);font-family:'Space Mono',monospace;white-space:nowrap;border-bottom:1px solid var(--border)}
-
-/* ALERT BANNER */
-.alert-banner{margin:0 16px 10px;padding:10px 14px;border-radius:8px;font-size:11px;font-weight:700;line-height:1.5;display:none}
-.alert-banner.show{display:block}
-.alert-banner.warn{background:var(--ybg);border:1px solid var(--ybdr);color:var(--y)}
-.alert-banner.danger{background:var(--rbg);border:1px solid var(--rbdr);color:var(--r)}
-.alert-banner.good{background:var(--gbg);border:1px solid var(--gbdr);color:var(--g)}
-
-.footer{font-size:8px;color:var(--txt3);text-align:center;padding:16px;letter-spacing:1px}
+.footer{font-size:8px;color:var(--txt3);text-align:center;padding:16px;letter-spacing:1px;line-height:1.8}
 </style>
 </head>
 <body>
@@ -184,15 +177,15 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 
 <!-- HEADER -->
 <div class="hdr">
-  <div class="hdr-brand">◈ SISTEMA DE ANÁLISIS DIARIO</div>
+  <div class="hdr-brand">◈ Sistema de Análisis Diario</div>
   <div class="hdr-main">
     <div>
       <div class="hdr-title" id="hdate">—</div>
-      <div class="hdr-date" id="hday">Cargando...</div>
+      <div class="hdr-date" id="hday">—</div>
+      <div class="live-pill loading" id="livePill">⟳ CARGANDO</div>
     </div>
-    <div class="hdr-right">
-      <div class="auto-badge loading" id="autoBadge">⟳ CARGANDO</div>
-      <div class="hdr-lastup" id="lastUp">—</div>
+    <div style="text-align:right">
+      <div style="font-size:9px;color:var(--txt3);font-family:'Space Mono',monospace" id="lastUp">—</div>
     </div>
   </div>
 </div>
@@ -208,16 +201,15 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 <!-- ══ DATOS ══ -->
 <div class="view active" id="view-datos">
 
-  <!-- ALERT BANNER -->
-  <div class="alert-banner" id="alertBanner"></div>
+  <div class="alert" id="alertBanner"></div>
 
   <!-- SEMAPHORE -->
-  <div class="sem-card" id="semCard">
+  <div class="sem" id="semCard">
     <div class="sem-row">
       <div class="sem-emoji" id="semEmoji">⏳</div>
       <div>
-        <div class="sem-label" id="semLabel" style="color:var(--txt3)">CARGANDO DATOS...</div>
-        <div class="sem-sub" id="semSub">Obteniendo datos del mercado en tiempo real</div>
+        <div class="sem-label" id="semLabel" style="color:var(--txt3)">CARGANDO...</div>
+        <div class="sem-sub" id="semSub">Obteniendo datos en tiempo real</div>
       </div>
     </div>
     <div class="bar-wrap">
@@ -225,68 +217,57 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
       <div class="bar-y" id="barY" style="flex:1"></div>
       <div class="bar-r" id="barR" style="flex:0"></div>
     </div>
-    <div class="bar-labels">
+    <div class="bar-labs">
       <span style="color:var(--g)">🟢 <span id="cntG">0</span></span>
       <span style="color:var(--y)">🟡 <span id="cntY">0</span></span>
       <span style="color:var(--r)">🔴 <span id="cntR">0</span></span>
-      <span id="cntT" style="color:var(--txt3)">0 indicadores</span>
+      <span id="cntT" style="color:var(--txt3)">—</span>
     </div>
   </div>
 
   <!-- ODOMETER -->
   <div class="odom" id="odomCard">
-    <div class="odom-top">CUENTAKILÓMETROS DEL CICLO</div>
+    <div class="odom-top">Cuentakilómetros del Ciclo</div>
     <div class="odom-hero">
       <div class="odom-emoji" id="odomEmoji">⏳</div>
       <div>
         <div class="odom-name" id="odomName" style="color:var(--txt3)">DETECTANDO FASE...</div>
-        <div class="odom-desc" id="odomDesc">Analizando indicadores del mercado</div>
+        <div class="odom-desc" id="odomDesc">Analizando indicadores</div>
       </div>
     </div>
     <div style="position:relative;margin-bottom:4px">
-      <div class="odom-segs" id="odomSegs">
-        <div class="odom-seg" style="flex:1;background:rgba(255,77,77,.2)">BEAR</div>
-        <div class="odom-seg" style="flex:2;background:rgba(245,200,66,.2)">FASE 1</div>
-        <div class="odom-seg" style="flex:1.5;background:rgba(77,138,255,.2)">F2 INI</div>
-        <div class="odom-seg" style="flex:1.5;background:rgba(0,232,122,.2)">F2 PLENA</div>
-        <div class="odom-seg" style="flex:1.5;background:rgba(175,82,222,.2)">FASE 3</div>
-        <div class="odom-seg" style="flex:1;background:rgba(255,107,53,.2)">DIST.</div>
-      </div>
+      <div class="odom-segs" id="odomSegs"></div>
       <div style="position:absolute;top:-8px;transition:left .8s;transform:translateX(-50%)" id="odomArrow">
         <div style="width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:10px solid var(--txt);margin:0 auto" id="odomTri"></div>
         <div style="width:2px;height:18px;background:var(--txt);margin:0 auto" id="odomLine"></div>
       </div>
     </div>
     <div class="odom-phase-icons">
-      <div style="flex:1;text-align:center">🐻</div>
-      <div style="flex:2;text-align:center">₿</div>
-      <div style="flex:1.5;text-align:center">🔄</div>
-      <div style="flex:1.5;text-align:center">🚀</div>
-      <div style="flex:1.5;text-align:center">🎆</div>
-      <div style="flex:1;text-align:center">📉</div>
+      <div style="flex:1;text-align:center">🐻</div><div style="flex:2;text-align:center">₿</div>
+      <div style="flex:1.5;text-align:center">🔄</div><div style="flex:1.5;text-align:center">🚀</div>
+      <div style="flex:1.5;text-align:center">🎆</div><div style="flex:1;text-align:center">📉</div>
     </div>
     <div class="odom-stats">
-      <div class="odom-stat"><div class="os-lbl">EN FASE</div><div class="os-val" id="odomDays" style="color:var(--txt3)">—</div><div class="os-sub">días</div></div>
-      <div class="odom-stat"><div class="os-lbl">CICLO</div><div class="os-val" id="odomProg" style="color:var(--txt3)">—%</div><div class="os-sub">completado</div></div>
-      <div class="odom-stat"><div class="os-lbl">SIGUIENTE</div><div class="os-val" id="odomNext" style="font-size:10px;color:var(--txt3)">—</div><div class="os-sub" id="odomNextSub">—</div></div>
+      <div class="os"><div class="os-lbl">En fase</div><div class="os-val" id="odomDays" style="color:var(--txt3)">—</div><div class="os-sub">días</div></div>
+      <div class="os"><div class="os-lbl">Ciclo</div><div class="os-val" id="odomProg" style="color:var(--txt3)">—%</div><div class="os-sub">completado</div></div>
+      <div class="os"><div class="os-lbl">Siguiente</div><div class="os-val" id="odomNext" style="font-size:10px;color:var(--txt3)">—</div><div class="os-sub" id="odomNextSub">—</div></div>
     </div>
     <div class="odom-action" id="odomAction"></div>
 
-    <!-- TOKENS BE STATUS -->
+    <!-- TOKENS BE -->
     <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:12px">
-      <div style="font-size:8px;letter-spacing:2px;color:var(--txt3);margin-bottom:8px;font-weight:700">TOKENS vs BREAKEVEN — TIEMPO REAL</div>
-      <div class="be-grid" style="margin:0 0 8px 0" id="beGrid"></div>
-      <div style="font-size:9px;color:var(--txt3);text-align:center" id="beCount">Cargando precios...</div>
+      <div style="font-size:8px;letter-spacing:2px;color:var(--txt3);margin-bottom:8px;font-weight:700;text-transform:uppercase">Tokens vs Breakeven — tiempo real</div>
+      <div class="be-grid" id="beGrid"></div>
+      <div style="font-size:9px;color:var(--txt3);text-align:center;margin-bottom:4px" id="beCount">Cargando...</div>
     </div>
   </div>
 
-  <!-- AUTO INDICATORS -->
-  <div class="slbl">AUTO — TIEMPO REAL</div>
-
-  <div class="auto-section">
-    <div class="auto-sec-hdr">
-      <div class="auto-sec-title">MERCADO CRYPTO</div>
-      <div class="auto-sec-badge" style="background:var(--gbg);color:var(--g);border:1px solid var(--gbdr)">AUTO ⚡</div>
+  <!-- AUTO — BTC y ETH/BTC -->
+  <div class="slbl">Auto — Precio tiempo real</div>
+  <div class="auto-card">
+    <div class="auto-card-hdr">
+      <div class="auto-card-lbl">BTC y ETH/BTC — CoinGecko</div>
+      <div style="font-size:8px;font-weight:700;padding:2px 7px;border-radius:5px;background:var(--gbg);color:var(--g);border:1px solid var(--gbdr)">AUTO ⚡</div>
     </div>
     <div class="auto-grid">
       <div class="auto-cell">
@@ -301,52 +282,91 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
         <div class="ac-ch" id="aEthbtcCh">—</div>
         <div class="ac-sig" id="aEthbtcSig">—</div>
       </div>
-      <div class="auto-cell">
-        <div class="ac-lbl">BTC DOMINANCE</div>
-        <div class="ac-val" id="aDom" style="color:var(--txt3)">—</div>
-        <div class="ac-ch" id="aDomCh">—</div>
-        <div class="ac-sig" id="aDomSig">—</div>
-      </div>
-      <div class="auto-cell">
-        <div class="ac-lbl">TOTAL2</div>
-        <div class="ac-val" id="aTotal2" style="color:var(--txt3)">—</div>
-        <div class="ac-ch" id="aTotal2Ch">—</div>
-        <div class="ac-sig" id="aTotal2Sig">—</div>
-      </div>
-      <div class="auto-cell">
-        <div class="ac-lbl">TOTAL3</div>
-        <div class="ac-val" id="aTotal3" style="color:var(--txt3)">—</div>
-        <div class="ac-ch" id="aTotal3Ch">—</div>
-        <div class="ac-sig" id="aTotal3Sig">—</div>
-      </div>
-      <div class="auto-cell">
-        <div class="ac-lbl">TOKENS SOBRE BE</div>
-        <div class="ac-val" id="aBeCount" style="color:var(--txt3)">—</div>
-        <div class="ac-ch" id="aBeCh" style="font-size:9px;color:var(--txt3)">de 10 tokens</div>
-        <div class="ac-sig" id="aBeSig">—</div>
-      </div>
     </div>
   </div>
 
-  <!-- MANUAL SECTION LABEL -->
-  <div class="slbl">MANUAL — TÚ INTRODUCES (4 datos)</div>
+  <!-- TRADINGVIEW MANUAL -->
+  <div class="slbl">TradingView — Tu foto diaria (7 datos)</div>
+
+  <!-- BTC DOMINANCE -->
+  <div class="ind" id="indDom">
+    <div class="ind-head" onclick="tog('Dom')">
+      <div class="ind-left">
+        <span class="ind-dot" id="dotDom">⬤</span>
+        <div><div class="ind-name">BTC DOMINANCE</div><div class="ind-note" id="noteDom">% del mercado total en BTC — TradingView BTC.D</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
+        <input class="ind-inp" id="inpDom" type="number" placeholder="60.0" step="0.1" oninput="calc()">
+        <span class="ind-unit">%</span>
+      </div>
+      <span class="ind-chev" id="chevDom">▼</span>
+    </div>
+    <div class="ind-drop" id="dropDom">
+      <div class="dd-desc">Porcentaje del mercado crypto que representa Bitcoin. Cuando baja del 58% el capital empieza a rotar hacia alts. Valor exacto de TradingView ticker BTC.D.</div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">&lt; 52%</span><span class="dd-lbl">Altseason posible — capital rotando</span></div>
+      <div class="dd-row"><span>🟡</span><span class="dd-range">52% – 62%</span><span class="dd-lbl">BTC lidera moderadamente</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">&gt; 62%</span><span class="dd-lbl">Alts sangrando vs BTC</span></div>
+    </div>
+  </div>
+
+  <!-- TOTAL2 -->
+  <div class="ind" id="indTotal2">
+    <div class="ind-head" onclick="tog('Total2')">
+      <div class="ind-left">
+        <span class="ind-dot" id="dotTotal2">⬤</span>
+        <div><div class="ind-name">TOTAL2</div><div class="ind-note" id="noteTotal2">Cap alts sin BTC (en B$) — TradingView TOTAL2</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
+        <input class="ind-inp" id="inpTotal2" type="number" placeholder="980" oninput="calc()">
+        <span class="ind-unit">B$</span>
+      </div>
+      <span class="ind-chev" id="chevTotal2">▼</span>
+    </div>
+    <div class="ind-drop" id="dropTotal2">
+      <div class="dd-desc">Capitalización total de alts incluyendo ETH, sin BTC. Superar $1.2T indica que ETH y alts grandes están en bull run activo.</div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">&gt; $1.2T</span><span class="dd-lbl">Alts grandes en bull run</span></div>
+      <div class="dd-row"><span>🟡</span><span class="dd-range">$900B – $1.2T</span><span class="dd-lbl">Recuperación en marcha</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">&lt; $900B</span><span class="dd-lbl">Alts grandes débiles</span></div>
+    </div>
+  </div>
+
+  <!-- TOTAL3 -->
+  <div class="ind" id="indTotal3">
+    <div class="ind-head" onclick="tog('Total3')">
+      <div class="ind-left">
+        <span class="ind-dot" id="dotTotal3">⬤</span>
+        <div><div class="ind-name">TOTAL3</div><div class="ind-note" id="noteTotal3">Cap alts sin BTC ni ETH (en B$) — TradingView TOTAL3</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
+        <input class="ind-inp" id="inpTotal3" type="number" placeholder="740" oninput="calc()">
+        <span class="ind-unit">B$</span>
+      </div>
+      <span class="ind-chev" id="chevTotal3">▼</span>
+    </div>
+    <div class="ind-drop" id="dropTotal3">
+      <div class="dd-desc">Capitalización total de alts excluyendo BTC y ETH. Mide la fuerza de las altcoins pequeñas y medianas.</div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">&gt; $1000B</span><span class="dd-lbl">Alts en modo bull</span></div>
+      <div class="dd-row"><span>🟡</span><span class="dd-range">$700B – $1000B</span><span class="dd-lbl">Alts laterales</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">&lt; $700B</span><span class="dd-lbl">Alts en zona de peligro</span></div>
+    </div>
+  </div>
 
   <!-- DXY -->
   <div class="ind" id="indDxy">
     <div class="ind-head" onclick="tog('Dxy')">
       <div class="ind-left">
         <span class="ind-dot" id="dotDxy">⬤</span>
-        <div><div class="ind-name">DXY — DÓLAR</div><div class="ind-note" id="noteDxy">Índice del dólar — de TradingView</div></div>
+        <div><div class="ind-name">DXY — DÓLAR</div><div class="ind-note" id="noteDxy">Índice dólar — TradingView DXY</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
-        <input class="ind-inp" id="inpDxy" type="number" placeholder="98.9" step="0.1" oninput="calc()">
+        <input class="ind-inp" id="inpDxy" type="number" placeholder="98.6" step="0.1" oninput="calc()">
         <span class="ind-unit"></span>
       </div>
       <span class="ind-chev" id="chevDxy">▼</span>
     </div>
     <div class="ind-drop" id="dropDxy">
-      <div class="dd-desc">Dólar débil = más liquidez global = bullish crypto. Lo ves en TradingView como "DXY".</div>
-      <div class="dd-row"><span>🟢</span><span class="dd-range">&lt; 98</span><span class="dd-lbl">Dólar débil — bullish</span></div>
+      <div class="dd-desc">Dólar débil = más liquidez global = bullish crypto. Dólar fuerte = presión bajista sobre todos los activos de riesgo.</div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">&lt; 98</span><span class="dd-lbl">Dólar débil — bullish crypto</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">98 – 103</span><span class="dd-lbl">Dólar neutral</span></div>
       <div class="dd-row"><span>🔴</span><span class="dd-range">&gt; 103</span><span class="dd-lbl">Dólar fuerte — presión bajista</span></div>
     </div>
@@ -357,19 +377,19 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
     <div class="ind-head" onclick="tog('Oil')">
       <div class="ind-left">
         <span class="ind-dot" id="dotOil">⬤</span>
-        <div><div class="ind-name">OIL BRENT</div><div class="ind-note" id="noteOil">Petróleo — de TradingView (BRENT)</div></div>
+        <div><div class="ind-name">OIL BRENT</div><div class="ind-note" id="noteOil">Petróleo — TradingView BRENT</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
-        <input class="ind-inp" id="inpOil" type="number" placeholder="92" step="0.1" oninput="calc()">
+        <input class="ind-inp" id="inpOil" type="number" placeholder="91" step="0.1" oninput="calc()">
         <span class="ind-unit">$</span>
       </div>
       <span class="ind-chev" id="chevOil">▼</span>
     </div>
     <div class="ind-drop" id="dropOil">
-      <div class="dd-desc">Petróleo alto genera inflación — presiona a la Fed a no bajar tipos — bearish crypto.</div>
-      <div class="dd-row"><span>🟢</span><span class="dd-range">&lt; $80</span><span class="dd-lbl">Inflación controlada</span></div>
+      <div class="dd-desc">Petróleo alto genera inflación, presiona a la Fed a no bajar tipos. Bearish para crypto. Por debajo de $80 es el escenario ideal.</div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">&lt; $80</span><span class="dd-lbl">Inflación controlada — bullish</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">$80 – $100</span><span class="dd-lbl">Elevado — vigilar</span></div>
-      <div class="dd-row"><span>🔴</span><span class="dd-range">&gt; $100</span><span class="dd-lbl">Presión inflacionaria</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">&gt; $100</span><span class="dd-lbl">Presión inflacionaria alta</span></div>
     </div>
   </div>
 
@@ -378,7 +398,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
     <div class="ind-head" onclick="tog('Bfr')">
       <div class="ind-left">
         <span class="ind-dot" id="dotBfr">⬤</span>
-        <div><div class="ind-name">BFR VOLMEX</div><div class="ind-note" id="noteBfr">Funding Rate — de TradingView (BFR)</div></div>
+        <div><div class="ind-name">BFR VOLMEX</div><div class="ind-note" id="noteBfr">Funding Rate — TradingView BFR</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
         <input class="ind-inp" id="inpBfr" type="number" placeholder="2.5" step="0.1" oninput="calc()">
@@ -387,10 +407,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
       <span class="ind-chev" id="chevBfr">▼</span>
     </div>
     <div class="ind-drop" id="dropBfr">
-      <div class="dd-desc">Funding Rate de futuros perpetuos. Alto = mercado apalancado al alza = riesgo de liquidaciones.</div>
+      <div class="dd-desc">Funding Rate de futuros perpetuos de BTC. Alto = mercado apalancado al alza = riesgo de liquidaciones en cascada. Negativo = posible squeeze alcista.</div>
       <div class="dd-row"><span>🟢</span><span class="dd-range">0 a 2</span><span class="dd-lbl">Neutral — saludable</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">2 a 5 o negativo</span><span class="dd-lbl">Vigilar</span></div>
-      <div class="dd-row"><span>🔴</span><span class="dd-range">&gt; 5</span><span class="dd-lbl">Sobrecomprado — peligro</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">&gt; 5</span><span class="dd-lbl">Sobrecomprado — peligro liquidaciones</span></div>
     </div>
   </div>
 
@@ -399,31 +419,31 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
     <div class="ind-head" onclick="tog('Others')">
       <div class="ind-left">
         <span class="ind-dot" id="dotOthers">⬤</span>
-        <div><div class="ind-name">OTHERS</div><div class="ind-note" id="noteOthers">Small caps — de TradingView (OTHERS)</div></div>
+        <div><div class="ind-name">OTHERS</div><div class="ind-note" id="noteOthers">Small caps — TradingView OTHERS</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
-        <input class="ind-inp" id="inpOthers" type="number" placeholder="190" oninput="calc()">
+        <input class="ind-inp" id="inpOthers" type="number" placeholder="193" oninput="calc()">
         <span class="ind-unit">B$</span>
       </div>
       <span class="ind-chev" id="chevOthers">▼</span>
     </div>
     <div class="ind-drop" id="dropOthers">
-      <div class="dd-desc">Cap de small caps excluyendo BTC, ETH y top 10. Cuando supera $300B el retail está entrando — señal de Fase 3.</div>
-      <div class="dd-row"><span>🟢</span><span class="dd-range">&gt; $300B</span><span class="dd-lbl">Retail en alts — Fase 3</span></div>
+      <div class="dd-desc">Cap de small caps excluyendo BTC, ETH y top10. Cuando supera $300B el retail está entrando en alts pequeñas — señal de Fase 3.</div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">&gt; $300B</span><span class="dd-lbl">Retail en alts — Fase 3 activa</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">$150B – $300B</span><span class="dd-lbl">Small caps recuperando</span></div>
       <div class="dd-row"><span>🔴</span><span class="dd-range">&lt; $150B</span><span class="dd-lbl">Small caps dormidas</span></div>
     </div>
   </div>
 
-  <!-- CLAUDE SECTION LABEL -->
-  <div class="slbl">CLAUDE TE DA — Análisis diario</div>
+  <!-- CLAUDE SECTION -->
+  <div class="slbl">Claude te da — Análisis diario (6 datos)</div>
 
-  <!-- FG -->
+  <!-- FEAR & GREED -->
   <div class="ind" id="indFg">
     <div class="ind-head" onclick="tog('Fg')">
       <div class="ind-left">
         <span class="ind-dot" id="dotFg">⬤</span>
-        <div><div class="ind-name">FEAR & GREED</div><div class="ind-note" id="noteFg">Sentimiento — Claude te lo da (Coinglass)</div></div>
+        <div><div class="ind-name">FEAR & GREED</div><div class="ind-note" id="noteFg">Sentimiento — Coinglass (Claude te lo da)</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
         <input class="ind-inp" id="inpFg" type="number" placeholder="50" min="0" max="100" oninput="calc()">
@@ -432,14 +452,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
       <span class="ind-chev" id="chevFg">▼</span>
     </div>
     <div class="ind-drop" id="dropFg">
-      <div class="dd-desc">Sentimiento del mercado. Claude te da el valor de Coinglass cada día. Por debajo de 25 = miedo extremo.</div>
+      <div class="dd-desc">Sentimiento general del mercado de Coinglass. Por debajo de 25 = miedo extremo = posible suelo. Por encima de 75 = codicia = preparar TPs.</div>
       <div class="dd-row"><span>🟢</span><span class="dd-range">&lt; 25</span><span class="dd-lbl">Miedo extremo — posible oportunidad</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">25 – 75</span><span class="dd-lbl">Zona neutral</span></div>
       <div class="dd-row"><span>🔴</span><span class="dd-range">&gt; 75</span><span class="dd-lbl">Codicia — preparar TPs</span></div>
     </div>
   </div>
 
-  <!-- ALT -->
+  <!-- ALTSEASON -->
   <div class="ind" id="indAlt">
     <div class="ind-head" onclick="tog('Alt')">
       <div class="ind-left">
@@ -453,19 +473,19 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
       <span class="ind-chev" id="chevAlt">▼</span>
     </div>
     <div class="ind-drop" id="dropAlt">
-      <div class="dd-desc">Mide si las alts superan a BTC. Por encima de 75 = altseason confirmada.</div>
+      <div class="dd-desc">Mide si las alts superan a BTC en los últimos 90 días. Por encima de 75 = altseason confirmada. Por debajo de 50 = Bitcoin Season.</div>
       <div class="dd-row"><span>🟢</span><span class="dd-range">&gt; 75</span><span class="dd-lbl">Altseason confirmada</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">50 – 75</span><span class="dd-lbl">Rotación en marcha</span></div>
-      <div class="dd-row"><span>🔴</span><span class="dd-range">&lt; 50</span><span class="dd-lbl">Bitcoin Season</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">&lt; 50</span><span class="dd-lbl">Bitcoin Season — alts durmiendo</span></div>
     </div>
   </div>
 
-  <!-- ETF -->
+  <!-- ETF FLOWS -->
   <div class="ind" id="indEtf">
     <div class="ind-head" onclick="tog('Etf')">
       <div class="ind-left">
         <span class="ind-dot" id="dotEtf">⬤</span>
-        <div><div class="ind-name">ETF FLOWS</div><div class="ind-note" id="noteEtf">Flujos institucionales — Claude te lo da (M$)</div></div>
+        <div><div class="ind-name">ETF FLOWS</div><div class="ind-note" id="noteEtf">Flujos institucionales M$ — Claude te lo da</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
         <input class="ind-inp" id="inpEtf" type="number" placeholder="-380" oninput="calc()">
@@ -474,14 +494,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
       <span class="ind-chev" id="chevEtf">▼</span>
     </div>
     <div class="ind-drop" id="dropEtf">
-      <div class="dd-desc">Flujos netos diarios en ETFs de BTC spot. Positivo = institucionales comprando.</div>
+      <div class="dd-desc">Flujos netos diarios en ETFs de BTC spot. Positivo = institucionales comprando. Negativo varios días consecutivos = señal bajista importante.</div>
       <div class="dd-row"><span>🟢</span><span class="dd-range">&gt; +300M</span><span class="dd-lbl">Institucionales comprando fuerte</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">0 a +300M</span><span class="dd-lbl">Entradas moderadas</span></div>
       <div class="dd-row"><span>🔴</span><span class="dd-range">Negativo</span><span class="dd-lbl">Salidas — institucionales vendiendo</span></div>
     </div>
   </div>
 
-  <!-- WHALES -->
+  <!-- BALLENAS -->
   <div class="ind" id="indWh">
     <div class="ind-head" onclick="tog('Wh')">
       <div class="ind-left">
@@ -495,14 +515,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
       <span class="ind-chev" id="chevWh">▼</span>
     </div>
     <div class="ind-drop" id="dropWh">
-      <div class="dd-desc">Comportamiento on-chain de grandes wallets. 1=Acumulando / 2=Neutral / 3=Enviando a exchanges.</div>
-      <div class="dd-row"><span>🟢</span><span class="dd-range">1 — Acumulando</span><span class="dd-lbl">Bullish estructural</span></div>
+      <div class="dd-desc">Comportamiento on-chain de grandes wallets. 1 = Acumulando / 2 = Neutral / 3 = Enviando a exchanges (preparando venta).</div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">1 — Acumulando</span><span class="dd-lbl">Ballenas comprando — bullish estructural</span></div>
       <div class="dd-row"><span>🟡</span><span class="dd-range">2 — Neutral</span><span class="dd-lbl">Sin movimiento significativo</span></div>
       <div class="dd-row"><span>🔴</span><span class="dd-range">3 — Exchanges</span><span class="dd-lbl">Preparando venta — alerta</span></div>
     </div>
   </div>
 
-  <!-- CLARITY -->
+  <!-- CLARITY ACT -->
   <div class="ind" id="indCl">
     <div class="ind-head" onclick="tog('Cl')">
       <div class="ind-left">
@@ -517,9 +537,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
     </div>
     <div class="ind-drop" id="dropCl">
       <div class="dd-desc">Estado de la Digital Asset Market Clarity Act. Catalítica directa para XRP, LINK y HBAR. 1=Firmada / 2=En proceso / 3=Bloqueada.</div>
-      <div class="dd-row"><span>🟢</span><span class="dd-range">1 — Firmada</span><span class="dd-lbl">Catalizador máximo</span></div>
-      <div class="dd-row"><span>🟡</span><span class="dd-range">2 — En proceso</span><span class="dd-lbl">Avanzando</span></div>
-      <div class="dd-row"><span>🔴</span><span class="dd-range">3 — Bloqueada</span><span class="dd-lbl">Incertidumbre</span></div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">1 — Firmada</span><span class="dd-lbl">Catalizador máximo para XRP/LINK/HBAR</span></div>
+      <div class="dd-row"><span>🟡</span><span class="dd-range">2 — En proceso</span><span class="dd-lbl">Avanzando — catalizador alcista</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">3 — Bloqueada</span><span class="dd-lbl">Incertidumbre regulatoria</span></div>
     </div>
   </div>
 
@@ -528,7 +548,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
     <div class="ind-head" onclick="tog('Fed')">
       <div class="ind-left">
         <span class="ind-dot" id="dotFed">⬤</span>
-        <div><div class="ind-name">FED / MACRO</div><div class="ind-note" id="noteFed">Postura Fed — Claude te lo da</div></div>
+        <div><div class="ind-name">FED / MACRO</div><div class="ind-note" id="noteFed">Postura Reserva Federal — Claude te lo da</div></div>
       </div>
       <div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()">
         <input class="ind-inp" id="inpFed" type="number" placeholder="2" min="1" max="3" oninput="calc()">
@@ -538,21 +558,25 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
     </div>
     <div class="ind-drop" id="dropFed">
       <div class="dd-desc">Postura de la Reserva Federal. 1=Dovish (bajando tipos) / 2=Neutral / 3=Hawkish (subiendo tipos).</div>
-      <div class="dd-row"><span>🟢</span><span class="dd-range">1 — Dovish</span><span class="dd-lbl">Liquidez aumentando</span></div>
-      <div class="dd-row"><span>🟡</span><span class="dd-range">2 — Neutral</span><span class="dd-lbl">Esperar datos</span></div>
-      <div class="dd-row"><span>🔴</span><span class="dd-range">3 — Hawkish</span><span class="dd-lbl">Presión bajista</span></div>
+      <div class="dd-row"><span>🟢</span><span class="dd-range">1 — Dovish</span><span class="dd-lbl">Bajando tipos — liquidez aumentando</span></div>
+      <div class="dd-row"><span>🟡</span><span class="dd-range">2 — Neutral</span><span class="dd-lbl">Tipos estables — esperar datos</span></div>
+      <div class="dd-row"><span>🔴</span><span class="dd-range">3 — Hawkish</span><span class="dd-lbl">Tipos altos — presión bajista</span></div>
     </div>
   </div>
 
-  <button class="save-btn" onclick="saveData()">💾  GUARDAR DATOS DEL DÍA</button>
+  <div class="save-btn" onclick="saveData()">💾  GUARDAR DATOS DEL DÍA</div>
   <div class="save-ok" id="saveOk">✓ Datos guardados correctamente</div>
-  <div class="footer">AUTO: BTC · ETH/BTC · Dominance · TOTAL2 · TOTAL3 · Tokens BE<br>MANUAL (4): DXY · Brent · BFR · OTHERS<br>CLAUDE: F&G · Altseason · ETF · Ballenas · Clarity · FED</div>
+  <div class="footer">
+    AUTO ⚡ BTC · ETH/BTC · Tokens BE<br>
+    TRADINGVIEW 📊 Dom% · TOTAL2 · TOTAL3 · DXY · Brent · BFR · OTHERS<br>
+    CLAUDE 🤖 F&G · Altseason · ETF · Ballenas · Clarity · FED
+  </div>
 </div>
 
 <!-- ══ ANÁLISIS ══ -->
 <div class="view" id="view-analisis">
-  <div class="slbl">PATRONES DETECTADOS</div>
-  <div id="aContainer"><div style="text-align:center;padding:30px;color:var(--txt3);font-size:12px">Cargando análisis...</div></div>
+  <div class="slbl">Patrones detectados</div>
+  <div id="aContainer"><div style="text-align:center;padding:30px;color:var(--txt3);font-size:12px">Introduce los datos para ver el análisis</div></div>
 </div>
 
 <!-- ══ SEÑAL ══ -->
@@ -562,20 +586,20 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
     <div class="sig-action" id="sigAction" style="color:var(--txt3)">CARGANDO...</div>
     <div class="sig-text" id="sigText">Obteniendo datos del mercado</div>
   </div>
-  <div class="slbl">PREVISIÓN PRÓXIMOS DÍAS</div>
+  <div class="slbl">Previsión próximos días</div>
   <div id="fcContainer"></div>
-  <div class="slbl" style="margin-top:14px">DETECTOR BEAR MARKET</div>
+  <div class="slbl" style="margin-top:14px">Detector Bear Market</div>
   <div id="bearContainer"></div>
-  <div class="slbl" style="margin-top:14px">CONFIRMACIÓN HISTÓRICA</div>
+  <div class="slbl" style="margin-top:14px">Confirmación Histórica</div>
   <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:10px;margin:0 16px;overflow:hidden" id="confPanel"></div>
   <div style="margin:10px 16px 14px;padding:12px 14px;border-radius:8px;font-size:11px;line-height:1.6;border:1px solid var(--border2);color:var(--txt2);background:var(--bg2)" id="confVerdict">Guarda al menos 2 días para ver la confirmación histórica</div>
 </div>
 
 <!-- ══ HISTORIAL ══ -->
 <div class="view" id="view-historial">
-  <div class="slbl">EVOLUCIÓN DE INDICADORES</div>
+  <div class="slbl">Evolución de indicadores</div>
   <div id="miniCharts"><div style="text-align:center;padding:30px;color:var(--txt3);font-size:12px">Guarda al menos 2 días de datos</div></div>
-  <div class="slbl">REGISTRO DIARIO</div>
+  <div class="slbl">Registro diario</div>
   <div class="hist-table-wrap">
     <table class="hist-table" id="histTable">
       <tr><td style="text-align:center;color:var(--txt3);padding:20px">Sin datos todavía</td></tr>
@@ -586,249 +610,167 @@ body{background:var(--bg);color:var(--txt);font-family:'Syne',sans-serif;min-hei
 
 </div>
 <script>
-// ══════════════════════════════════════
-// PORTFOLIO DATA — Tus tokens con precios actuales
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// PORTFOLIO — para calcular BE status en tiempo real
+// ═══════════════════════════════════════════════════════════════
 var PORTFOLIO = [
-  {sym:'BTC',  cgId:'bitcoin',           be:88402.79, qty:0.01091,  color:'#f7931a'},
-  {sym:'ETH',  cgId:'ethereum',          be:2862.79,  qty:0.34695,  color:'#627eea'},
-  {sym:'SOL',  cgId:'solana',            be:116.52,   qty:11.0747,  color:'#9945ff'},
-  {sym:'LINK', cgId:'chainlink',         be:10.19,    qty:88.40866, color:'#375bd2'},
-  {sym:'XRP',  cgId:'ripple',            be:1.94,     qty:572.01113,color:'#00aae4'},
-  {sym:'HBAR', cgId:'hedera-hashgraph',  be:0.09904,  qty:8719.32,  color:'#8e9494'},
-  {sym:'AAVE', cgId:'aave',             be:136.07,   qty:4.81465,  color:'#b6509e'},
-  {sym:'NEAR', cgId:'near',             be:1.37,     qty:376.62466,color:'#00c08b'},
-  {sym:'GRT',  cgId:'the-graph',         be:0.03421,  qty:15201.67, color:'#6747ed'},
-  {sym:'DOT',  cgId:'polkadot',          be:1.53,     qty:228.48539,color:'#e6007a'}
+  {sym:'BTC',  cgId:'bitcoin',          be:88402.79, color:'#f7931a'},
+  {sym:'ETH',  cgId:'ethereum',         be:2862.79,  color:'#627eea'},
+  {sym:'SOL',  cgId:'solana',           be:116.52,   color:'#9945ff'},
+  {sym:'LINK', cgId:'chainlink',        be:10.19,    color:'#375bd2'},
+  {sym:'XRP',  cgId:'ripple',           be:1.94,     color:'#00aae4'},
+  {sym:'HBAR', cgId:'hedera-hashgraph', be:0.09904,  color:'#8e9494'},
+  {sym:'AAVE', cgId:'aave',            be:136.07,   color:'#b6509e'},
+  {sym:'NEAR', cgId:'near',            be:1.37,     color:'#00c08b'},
+  {sym:'GRT',  cgId:'the-graph',        be:0.03421,  color:'#6747ed'},
+  {sym:'DOT',  cgId:'polkadot',         be:1.53,     color:'#e6007a'}
 ];
 var tokenPrices = {};
+var autoData = {btc:0, eth:0, ethbtc:0, btcCh:0, ethCh:0};
 
-// ══════════════════════════════════════
-// HISTORIAL PRECARGADO (tus 4 días)
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// PRELOADED HISTORY — tus 5 días
+// ═══════════════════════════════════════════════════════════════
 var PRELOADED = [
+  {_date:'Sat May 30 2026',_phase:'phase1',_ts:1748563200000,
+   Dom:'59.99',Total2:'981',Total3:'738',Dxy:'98.63',Oil:'91.03',Bfr:'5.15',Others:'193.6',
+   Fg:'26',Alt:'34',Etf:'-380',Wh:'2',Cl:'2',Fed:'2',
+   _btc:73464,_ethbtc:0.027385},
   {_date:'Wed May 28 2026',_phase:'phase1',_ts:1748390400000,
-   Dxy:'98.916',Oil:'92.5',Bfr:'8.66',Others:'191',
+   Dom:'60.34',Total2:'980',Total3:'735',Dxy:'98.916',Oil:'92.5',Bfr:'8.66',Others:'191',
    Fg:'23',Alt:'34',Etf:'-380',Wh:'2',Cl:'2',Fed:'2',
-   _btc:73100,_dom:60.34,_ethbtc:0.027097,_total2:979,_total3:735},
+   _btc:73100,_ethbtc:0.027097},
   {_date:'Tue May 27 2026',_phase:'phase1',_ts:1748304000000,
-   Dxy:'98.84',Oil:'92.5',Bfr:'6.11',Others:'193',
+   Dom:'60.47',Total2:'991',Total3:'742',Dxy:'98.84',Oil:'92.5',Bfr:'6.11',Others:'193',
    Fg:'34',Alt:'35',Etf:'-281',Wh:'2',Cl:'2',Fed:'2',
-   _btc:75681,_dom:60.47,_ethbtc:0.027313,_total2:991,_total3:742},
+   _btc:75681,_ethbtc:0.027313},
   {_date:'Mon May 26 2026',_phase:'phase1',_ts:1748217600000,
-   Dxy:'98.7',Oil:'96',Bfr:'1.82',Others:'194',
+   Dom:'60.66',Total2:'998',Total3:'752',Dxy:'98.7',Oil:'96',Bfr:'1.82',Others:'194',
    Fg:'42',Alt:'38',Etf:'0',Wh:'2',Cl:'2',Fed:'2',
-   _btc:77000,_dom:60.66,_ethbtc:0.027314,_total2:998,_total3:752},
+   _btc:77000,_ethbtc:0.027314},
   {_date:'Sun May 25 2026',_phase:'phase1',_ts:1748131200000,
-   Dxy:'98.5',Oil:'96',Bfr:'2.49',Others:'194',
+   Dom:'60.59',Total2:'1003',Total3:'758',Dxy:'98.5',Oil:'96',Bfr:'2.49',Others:'194',
    Fg:'42',Alt:'38',Etf:'0',Wh:'2',Cl:'2',Fed:'2',
-   _btc:78000,_dom:60.59,_ethbtc:0.027474,_total2:1003,_total3:758}
+   _btc:78000,_ethbtc:0.027474}
 ];
 
 function initHistory(){
-  var existing = getHistory();
-  if(existing.length === 0){
-    saveHistory(PRELOADED);
-  }
+  if(getHistory().length === 0) saveHistory(PRELOADED);
 }
 
-// ══════════════════════════════════════
-// MARKET DATA — CoinGecko Auto Fetch
-// ══════════════════════════════════════
-var autoData = {btc:0,eth:0,dom:0,total2:0,total3:0,btcCh:0,ethCh:0};
-
+// ═══════════════════════════════════════════════════════════════
+// FETCH — solo BTC, ETH y precios de tokens
+// ═══════════════════════════════════════════════════════════════
 function fetchAutoData(){
-  setBadge('loading','⟳ CARGANDO');
-
-  var cgIds = PORTFOLIO.map(function(t){return t.cgId;}).join(',');
-  var priceUrl = 'https://api.coingecko.com/api/v3/simple/price?ids='+cgIds+'&vs_currencies=usd&include_24hr_change=true';
-  var globalUrl = 'https://api.coingecko.com/api/v3/global';
-
-  Promise.all([
-    fetch(priceUrl,{signal:AbortSignal.timeout(10000)}).then(function(r){return r.json();}),
-    fetch(globalUrl,{signal:AbortSignal.timeout(10000)}).then(function(r){return r.json();})
-  ]).then(function(results){
-    var prices = results[0];
-    var global = results[1].data;
-
-    // Token prices
-    PORTFOLIO.forEach(function(t){
-      if(prices[t.cgId]){
-        tokenPrices[t.sym] = {
-          price: prices[t.cgId].usd || 0,
-          ch: prices[t.cgId].usd_24h_change || 0
-        };
+  setPill('loading','⟳ ACTUALIZANDO');
+  var ids = PORTFOLIO.map(function(t){return t.cgId;}).join(',');
+  fetch('https://api.coingecko.com/api/v3/simple/price?ids='+ids+'&vs_currencies=usd&include_24hr_change=true',
+    {signal:AbortSignal.timeout(12000)})
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+    .then(function(data){
+      PORTFOLIO.forEach(function(t){
+        var d = data[t.cgId];
+        if(d&&d.usd) tokenPrices[t.sym] = {price:d.usd, ch:d.usd_24h_change||0};
+      });
+      var btc = data['bitcoin'];
+      var eth = data['ethereum'];
+      if(btc&&btc.usd){
+        autoData.btc   = btc.usd;
+        autoData.btcCh = btc.usd_24h_change||0;
       }
+      if(eth&&eth.usd&&autoData.btc>0){
+        autoData.eth    = eth.usd;
+        autoData.ethCh  = eth.usd_24h_change||0;
+        autoData.ethbtc = eth.usd/autoData.btc;
+      }
+      updateAutoDisplay();
+      setPill('on','<span class="dot"></span> LIVE');
+      document.getElementById('lastUp').textContent =
+        new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      calc();
+    })
+    .catch(function(){
+      setPill('off','✗ SIN CONEXIÓN');
+      calc();
     });
-
-    // BTC
-    var btcData = prices['bitcoin'];
-    if(btcData){
-      autoData.btc = btcData.usd;
-      autoData.btcCh = btcData.usd_24h_change || 0;
-    }
-
-    // ETH/BTC ratio
-    var ethData = prices['ethereum'];
-    if(ethData && autoData.btc > 0){
-      autoData.eth = ethData.usd;
-      autoData.ethCh = ethData.usd_24h_change || 0;
-      autoData.ethbtc = ethData.usd / autoData.btc;
-    }
-
-    // Global data
-    if(global){
-      autoData.dom = global.market_cap_percentage && global.market_cap_percentage.btc
-        ? parseFloat(global.market_cap_percentage.btc.toFixed(2)) : 0;
-      var totalMcap = global.total_market_cap && global.total_market_cap.usd
-        ? global.total_market_cap.usd : 0;
-      var btcMcap = totalMcap * (autoData.dom/100);
-      var ethMcap = (ethData && ethData.usd) ? ethData.usd * (global.active_cryptocurrencies ? 1 : 1) : 0;
-
-      // Approximate TOTAL2 and TOTAL3 from global data
-      if(global.total_market_cap){
-        var tm = global.total_market_cap.usd / 1e9;
-        autoData.total2 = Math.round(tm * (1 - autoData.dom/100));
-        autoData.total3 = Math.round(autoData.total2 * 0.74);
-      }
-    }
-
-    updateAutoDisplay();
-    setBadge('live','⚡ LIVE');
-    document.getElementById('lastUp').textContent =
-      'Actualizado ' + new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    calc();
-
-  }).catch(function(err){
-    setBadge('err','✗ SIN DATOS AUTO');
-    calc();
-  });
 }
 
-function setBadge(type, txt){
-  var b = document.getElementById('autoBadge');
-  b.className = 'auto-badge ' + type;
-  b.textContent = txt;
+function setPill(type, html){
+  var p = document.getElementById('livePill');
+  p.className = 'live-pill '+type;
+  p.innerHTML = html;
 }
 
-function fmtPrice(p){
-  if(p >= 10000) return '$' + Math.round(p).toLocaleString('en-US');
-  if(p >= 100) return '$' + p.toFixed(2);
-  if(p >= 1) return '$' + p.toFixed(3);
-  if(p >= 0.01) return '$' + p.toFixed(4);
-  return '$' + p.toFixed(5);
+function fp(v){
+  v=parseFloat(v)||0;
+  if(v>=10000) return '$'+Math.round(v).toLocaleString('en-US');
+  if(v>=100)   return '$'+v.toFixed(2);
+  if(v>=1)     return '$'+v.toFixed(3);
+  if(v>=0.01)  return '$'+v.toFixed(4);
+  return '$'+v.toFixed(5);
 }
 
 function updateAutoDisplay(){
-  function setCell(id, val, chId, ch, sigId, sig, sigCol){
-    var el = document.getElementById(id);
-    if(el){ el.textContent = val; }
-    if(chId){
-      var che = document.getElementById(chId);
-      if(che){
-        che.textContent = (ch >= 0 ? '▲ +' : '▼ ') + Math.abs(ch).toFixed(2) + '%';
-        che.style.color = ch >= 0 ? 'var(--g)' : 'var(--r)';
-      }
-    }
-    if(sigId){
-      var se = document.getElementById(sigId);
-      if(se){ se.textContent = sig; se.style.color = sigCol; }
-    }
+  function setCell(valId, chId, sigId, val, ch, sig, col){
+    var ve=document.getElementById(valId);
+    var ce=document.getElementById(chId);
+    var se=document.getElementById(sigId);
+    if(ve){ve.textContent=val;ve.style.color=col;}
+    if(ce&&ch!==null){ce.textContent=(ch>=0?'▲ +':'▼ ')+Math.abs(ch).toFixed(2)+'%';ce.style.color=ch>=0?'var(--g)':'var(--r)';}
+    if(se){se.textContent=sig;se.style.color=col;}
   }
 
-  // BTC
-  var btcSig = autoData.btc >= 100000 ? ['🟢 Bull run activo','var(--g)'] :
-               autoData.btc >= 80000 ? ['🟡 Recuperación','var(--y)'] :
-               ['🔴 Zona de riesgo','var(--r)'];
-  setCell('aBtc', autoData.btc > 0 ? '$'+Math.round(autoData.btc).toLocaleString('en-US') : '—',
-          'aBtcCh', autoData.btcCh, 'aBtcSig', btcSig[0], btcSig[1]);
-  if(autoData.btc > 0){
-    document.getElementById('aBtc').style.color = btcSig[1];
-  }
+  var btcCol = autoData.btc>=100000?'var(--g)':autoData.btc>=80000?'var(--y)':'var(--r)';
+  var btcSig = autoData.btc>=100000?'🟢 Bull run':autoData.btc>=80000?'🟡 Recuperando':'🔴 Zona riesgo';
+  setCell('aBtc','aBtcCh','aBtcSig',autoData.btc>0?'$'+Math.round(autoData.btc).toLocaleString('en-US'):'—',autoData.btcCh,btcSig,btcCol);
 
-  // ETH/BTC
-  var eb = autoData.ethbtc || 0;
-  var ebSig = eb >= 0.038 ? ['🟢 Rotación iniciada','var(--g)'] :
-              eb >= 0.030 ? ['🟡 ETH neutral','var(--y)'] :
-              ['🔴 ETH muy débil','var(--r)'];
-  setCell('aEthbtc', eb > 0 ? eb.toFixed(5) : '—',
-          'aEthbtcCh', null, 0, 'aEthbtcSig', ebSig[0], ebSig[1]);
-  if(eb > 0) document.getElementById('aEthbtc').style.color = ebSig[1];
+  var eb=autoData.ethbtc||0;
+  var ebCol=eb>=0.038?'var(--g)':eb>=0.030?'var(--y)':eb>0?'var(--r)':'var(--txt3)';
+  var ebSig=eb>=0.038?'🟢 Rotación iniciada':eb>=0.030?'🟡 ETH neutral':'🔴 ETH muy débil';
+  setCell('aEthbtc','aEthbtcCh','aEthbtcSig',eb>0?eb.toFixed(5):'—',autoData.ethCh,ebSig,ebCol);
 
-  // Dominance
-  var domSig = autoData.dom < 52 ? ['🟢 Altseason posible','var(--g)'] :
-               autoData.dom < 62 ? ['🟡 BTC lidera','var(--y)'] :
-               ['🔴 Alts débiles','var(--r)'];
-  setCell('aDom', autoData.dom > 0 ? autoData.dom.toFixed(1)+'%' : '—',
-          null, 0, 'aDomSig', domSig[0], domSig[1]);
-  if(autoData.dom > 0) document.getElementById('aDom').style.color = domSig[1];
-
-  // TOTAL2
-  var t2Sig = autoData.total2 >= 1200 ? ['🟢 Alts grandes bull','var(--g)'] :
-              autoData.total2 >= 900 ? ['🟡 Recuperando','var(--y)'] :
-              ['🔴 Alts débiles','var(--r)'];
-  setCell('aTotal2', autoData.total2 > 0 ? autoData.total2+'B$' : '—',
-          null, 0, 'aTotal2Sig', t2Sig[0], t2Sig[1]);
-  if(autoData.total2 > 0) document.getElementById('aTotal2').style.color = t2Sig[1];
-
-  // TOTAL3
-  var t3Sig = autoData.total3 >= 1000 ? ['🟢 Alts en bull','var(--g)'] :
-              autoData.total3 >= 700 ? ['🟡 Laterales','var(--y)'] :
-              ['🔴 Peligro','var(--r)'];
-  setCell('aTotal3', autoData.total3 > 0 ? autoData.total3+'B$' : '—',
-          null, 0, 'aTotal3Sig', t3Sig[0], t3Sig[1]);
-  if(autoData.total3 > 0) document.getElementById('aTotal3').style.color = t3Sig[1];
-
-  // Tokens BE
   updateBEGrid();
 }
 
 function updateBEGrid(){
-  var aboveCount = 0;
-  var html = '';
+  var above=0, html='';
   PORTFOLIO.forEach(function(t){
-    var tp = tokenPrices[t.sym];
-    var price = tp ? tp.price : 0;
-    var pnl = price > 0 ? ((price/t.be)-1)*100 : null;
-    var above = pnl !== null && pnl >= 0;
-    if(above) aboveCount++;
-    var col = above ? 'var(--g)' : pnl !== null && pnl > -10 ? 'var(--y)' : 'var(--r)';
-    var pct = pnl !== null ? Math.min(100, Math.max(0, (price/t.be)*100)) : 0;
-    html += '<div class="be-card" style="border-color:'+(above?'var(--gbdr)':pnl!==null&&pnl>-10?'var(--ybdr)':'var(--rbdr)')+'">'
+    var tp=tokenPrices[t.sym];
+    var price=tp?tp.price:0;
+    var pnl=price>0?(price/t.be-1)*100:null;
+    if(pnl!==null&&pnl>=0) above++;
+    var col=pnl===null?'var(--txt3)':pnl>=0?'var(--g)':pnl>-10?'var(--y)':'var(--r)';
+    var pct=price>0?Math.min(100,(price/t.be)*100):0;
+    var bdrCol=pnl===null?'var(--border)':pnl>=0?'var(--gbdr)':pnl>-10?'var(--ybdr)':'var(--rbdr)';
+    html+='<div class="be-card" style="border-color:'+bdrCol+'">'
       +'<div class="be-sym" style="color:'+t.color+'">'+t.sym+'</div>'
-      +'<div class="be-price">'+fmtPrice(price)+'</div>'
+      +'<div class="be-price">'+fp(price)+'</div>'
       +'<div class="be-pnl" style="color:'+col+'">'+(pnl!==null?(pnl>=0?'+':'')+pnl.toFixed(1)+'%':'—')+'</div>'
-      +'<div class="be-bar-wrap"><div class="be-bar" style="width:'+pct.toFixed(0)+'%;background:'+col+'"></div></div>'
+      +'<div class="be-track"><div class="be-fill" style="width:'+pct.toFixed(0)+'%;background:'+col+'"></div></div>'
       +'</div>';
   });
-  var grid = document.getElementById('beGrid');
-  if(grid) grid.innerHTML = html;
+  var g=document.getElementById('beGrid');
+  if(g) g.innerHTML=html;
+  var bc=document.getElementById('beCount');
+  if(bc) bc.textContent=above+'/10 tokens sobre su breakeven';
 
-  var cnt = document.getElementById('beCount');
-  var beEl = document.getElementById('aBeCount');
-  var beSig = document.getElementById('aBeSig');
-  var beCh = document.getElementById('aBeCh');
-  if(cnt) cnt.textContent = aboveCount + '/10 tokens sobre su breakeven';
-  if(beEl){
-    beEl.textContent = aboveCount+'/10';
-    beEl.style.color = aboveCount >= 5 ? 'var(--g)' : aboveCount >= 2 ? 'var(--y)' : 'var(--r)';
-  }
-  if(beCh) beCh.textContent = 'de 10 tokens';
-  if(beSig){
-    beSig.textContent = aboveCount >= 5 ? '🟢 Fase 2 activa' : aboveCount >= 2 ? '🟡 Transición' : '🔴 Fase 1';
-    beSig.style.color = aboveCount >= 5 ? 'var(--g)' : aboveCount >= 2 ? 'var(--y)' : 'var(--r)';
-  }
+  // Update auto signal for BE count
+  var col=above>=5?'var(--g)':above>=2?'var(--y)':'var(--r)';
+  var sig=above>=5?'🟢 Fase 2 activa':above>=2?'🟡 Transición':'🔴 Fase 1';
 }
 
-// ══════════════════════════════════════
-// MANUAL INDICATORS LOGIC
-// ══════════════════════════════════════
-var MANUAL_IDS = ['Dxy','Oil','Bfr','Others','Fg','Alt','Etf','Wh','Cl','Fed'];
-var manualSigs = {};
+// ═══════════════════════════════════════════════════════════════
+// MANUAL INDICATORS
+// ═══════════════════════════════════════════════════════════════
+var MANUAL_IDS = ['Dom','Total2','Total3','Dxy','Oil','Bfr','Others','Fg','Alt','Etf','Wh','Cl','Fed'];
+var manSigs = {};
 
 function getSig(id, v){
   if(v===''||v===null||isNaN(parseFloat(v))) return 'n';
-  var n = parseFloat(v);
+  var n=parseFloat(v);
+  if(id==='Dom')    return n<52?'g':n<62?'y':'r';
+  if(id==='Total2') return n>=1200?'g':n>=900?'y':'r';
+  if(id==='Total3') return n>=1000?'g':n>=700?'y':'r';
   if(id==='Dxy')    return n<98?'g':n<103?'y':'r';
   if(id==='Oil')    return n<80?'g':n<100?'y':'r';
   if(id==='Bfr')    return n<0?'y':n<=2?'g':n<=5?'y':'r';
@@ -844,78 +786,61 @@ function getSig(id, v){
 
 function getNote(id, v){
   if(!v||isNaN(parseFloat(v))) return null;
-  var n = parseFloat(v);
-  if(id==='Dxy') return n<98?'Dólar débil — bullish crypto':n<103?'Dólar neutral':'Dólar fuerte — presión bajista';
-  if(id==='Oil') return n<80?'Petróleo bajo — inflación controlada':n<100?'Petróleo elevado — vigilar':'Presión inflacionaria alta';
-  if(id==='Bfr') return n<0?'Negativo — posible squeeze alcista':n<=2?'BFR sano — equilibrado':n<=5?'BFR elevado — vigilar':'BFR extremo — liquidación inminente ⚠️';
+  var n=parseFloat(v);
+  if(id==='Dom')    return n<52?'Altseason posible':n<58?'Capital rotando levemente':n<62?'BTC lidera':'Alts sangrando vs BTC';
+  if(id==='Total2') return n>=1200?'Alts grandes en bull run':n>=900?'Recuperando':'Alts grandes débiles';
+  if(id==='Total3') return n>=1000?'Alts en modo bull':n>=700?'Alts laterales':'Alts en zona de peligro';
+  if(id==='Dxy')    return n<98?'Dólar débil — bullish':n<103?'Dólar neutral':'Dólar fuerte — presión bajista';
+  if(id==='Oil')    return n<80?'Petróleo bajo — inflación controlada':n<100?'Petróleo elevado — vigilar':'Presión inflacionaria alta';
+  if(id==='Bfr')    return n<0?'Negativo — posible squeeze alcista':n<=2?'BFR sano — equilibrado':n<=5?'BFR elevado — vigilar':'BFR extremo — riesgo liquidaciones ⚠️';
   if(id==='Others') return n>=300?'OTHERS >$300B — retail en Fase 3':n>=150?'OTHERS recuperando':'OTHERS dormido — sin retail';
-  if(id==='Fg') return n<=25?'Miedo extremo — posible suelo':n<=45?'Miedo — pesimismo':n<=55?'Neutral':n<=75?'Codicia — preparar TPs':'Codicia extrema — ejecutar TPs';
-  if(id==='Alt') return n>=75?'Altseason confirmada':n>=50?'Rotación en marcha':n>=40?'Transición':'Bitcoin Season — alts durmiendo';
-  if(id==='Etf') return n>=300?'Institucionales comprando fuerte':n>=0?'Entradas moderadas':'Salidas — institucionales vendiendo';
-  if(id==='Wh') return n===1?'Ballenas acumulando — bullish':n===2?'Ballenas neutrales':'Ballenas enviando a exchanges ⚠️';
-  if(id==='Cl') return n===1?'Ley firmada — catalizador máximo':n===2?'Ley avanzando':'Ley bloqueada — incertidumbre';
-  if(id==='Fed') return n===1?'Fed dovish — liquidez aumentando':n===2?'Fed neutral':'Fed hawkish — presión bajista';
+  if(id==='Fg')     return n<=25?'Miedo extremo — posible suelo':n<=45?'Miedo — mercado pesimista':n<=55?'Neutral':n<=75?'Codicia — preparar TPs':'Codicia extrema — ejecutar TPs';
+  if(id==='Alt')    return n>=75?'Altseason confirmada':n>=50?'Rotación en marcha':n>=40?'Transición':'Bitcoin Season — alts durmiendo';
+  if(id==='Etf')    return n>=300?'Institucionales comprando fuerte':n>=0?'Entradas moderadas':'Salidas — institucionales vendiendo';
+  if(id==='Wh')     return n===1?'Ballenas acumulando — bullish':n===2?'Ballenas neutrales':'Ballenas enviando a exchanges ⚠️';
+  if(id==='Cl')     return n===1?'Ley firmada — catalizador máximo':n===2?'Ley avanzando':'Ley bloqueada — incertidumbre';
+  if(id==='Fed')    return n===1?'Fed dovish — liquidez aumentando':n===2?'Fed neutral':'Fed hawkish — presión bajista';
   return null;
 }
 
 function getAutoSig(key){
-  if(key==='btc') return autoData.btc>=100000?'g':autoData.btc>=80000?'y':autoData.btc>0?'r':'n';
+  if(key==='btc')    return autoData.btc>=100000?'g':autoData.btc>=80000?'y':autoData.btc>0?'r':'n';
   if(key==='ethbtc'){var eb=autoData.ethbtc||0;return eb>=0.038?'g':eb>=0.030?'y':eb>0?'r':'n';}
-  if(key==='dom') return autoData.dom<52?'g':autoData.dom<62?'y':autoData.dom>0?'r':'n';
-  if(key==='total2') return autoData.total2>=1200?'g':autoData.total2>=900?'y':autoData.total2>0?'r':'n';
-  if(key==='total3') return autoData.total3>=1000?'g':autoData.total3>=700?'y':autoData.total3>0?'r':'n';
   return 'n';
 }
 
 function calc(){
-  // Count manual signals
   var g=0,y=0,r=0,tot=0;
-
-  // Auto signals count
-  ['btc','ethbtc','dom','total2','total3'].forEach(function(k){
-    var s = getAutoSig(k);
-    if(s!=='n'){tot++;if(s==='g')g++;else if(s==='y')y++;else r++;}
+  ['btc','ethbtc'].forEach(function(k){
+    var s=getAutoSig(k);if(s!=='n'){tot++;if(s==='g')g++;else if(s==='y')y++;else r++;}
   });
-
-  // Manual signals
   MANUAL_IDS.forEach(function(id){
-    var inp = document.getElementById('inp'+id);
-    var v = inp ? inp.value : '';
-    var s = getSig(id, v);
-    var note = getNote(id, v);
-    manualSigs[id] = {v:v, s:s, note:note};
-
-    var card  = document.getElementById('ind'+id);
-    var dot   = document.getElementById('dot'+id);
-    var noteEl= document.getElementById('note'+id);
-    var inpEl = document.getElementById('inp'+id);
-
-    if(card) card.className = 'ind'+(s!=='n'?' '+s:'');
-    if(dot){
-      dot.textContent = v?({g:'🟢',y:'🟡',r:'🔴',n:'⬤'}[s]||'⬤'):'⬤';
-      dot.className='ind-dot'+(s!=='n'?' '+s:'');
-    }
-    if(noteEl&&note){ noteEl.textContent=note; noteEl.className='ind-note'+(s!=='n'?' '+s:''); }
+    var inp=document.getElementById('inp'+id);
+    var v=inp?inp.value:'';
+    var s=getSig(id,v);
+    var note=getNote(id,v);
+    manSigs[id]={v:v,s:s,note:note};
+    var card=document.getElementById('ind'+id);
+    var dot=document.getElementById('dot'+id);
+    var noteEl=document.getElementById('note'+id);
+    var inpEl=document.getElementById('inp'+id);
+    if(card) card.className='ind'+(s!=='n'?' '+s:'');
+    if(dot){dot.textContent=v?({g:'🟢',y:'🟡',r:'🔴',n:'⬤'}[s]||'⬤'):'⬤';dot.className='ind-dot'+(s!=='n'?' '+s:'');}
+    if(noteEl&&note){noteEl.textContent=note;noteEl.className='ind-note'+(s!=='n'?' '+s:'');}
     if(inpEl) inpEl.className='ind-inp'+(v&&s!=='n'?' '+s:'');
-
     if(v&&s!=='n'){tot++;if(s==='g')g++;else if(s==='y')y++;else r++;}
   });
 
-  // Semaphore
-  var pG=tot?g/tot:0, pR=tot?r/tot:0;
+  var pG=tot?g/tot:0,pR=tot?r/tot:0;
   var emoji,label,sub,color,cls;
-  if(tot===0){
-    emoji='⟳';label='CARGANDO DATOS';sub='Obteniendo mercado en tiempo real...';color='var(--txt3)';cls='';
-  } else if(pG>=0.55){
-    emoji='🟢';label='MERCADO ALCISTA';sub='Mayoría de señales positivas. Mantén posiciones.';color='var(--g)';cls='green';
-  } else if(pR>=0.45){
-    emoji='🔴';label='ALERTA BAJISTA';sub='Riesgo elevado. Revisa tu estrategia de salida.';color='var(--r)';cls='red';
-  } else {
-    emoji='🟡';label='PRECAUCIÓN';sub='Mercado mixto. No añadir. Vigilar señales.';color='var(--y)';cls='yellow';
-  }
-  document.getElementById('semCard').className='sem-card'+( cls?' '+cls:'');
+  if(tot===0){emoji='⟳';label='CARGANDO DATOS';sub='Obteniendo mercado en tiempo real...';color='var(--txt3)';cls='';}
+  else if(pG>=0.55){emoji='🟢';label='MERCADO ALCISTA';sub='Mayoría de señales positivas. Mantén posiciones.';color='var(--g)';cls='green';}
+  else if(pR>=0.45){emoji='🔴';label='ALERTA BAJISTA';sub='Riesgo elevado. Revisa tu estrategia de salida.';color='var(--r)';cls='red';}
+  else{emoji='🟡';label='PRECAUCIÓN';sub='Mercado mixto. No añadir. Vigilar señales.';color='var(--y)';cls='yellow';}
+
+  document.getElementById('semCard').className='sem'+(cls?' '+cls:'');
   document.getElementById('semEmoji').textContent=emoji;
-  var lbl=document.getElementById('semLabel'); lbl.textContent=label; lbl.style.color=color;
+  var lbl=document.getElementById('semLabel');lbl.textContent=label;lbl.style.color=color;
   document.getElementById('semSub').textContent=sub;
   document.getElementById('barG').style.flex=g;
   document.getElementById('barY').style.flex=y||(tot===0?1:0);
@@ -925,308 +850,238 @@ function calc(){
   document.getElementById('cntR').textContent=r;
   document.getElementById('cntT').textContent=tot+' indicadores';
 
-  // Check BFR alert
   checkAlerts();
   renderOdometer();
 }
 
 function checkAlerts(){
-  var bfr = parseFloat(manualSigs.Bfr && manualSigs.Bfr.v) || 0;
-  var etf = parseFloat(manualSigs.Etf && manualSigs.Etf.v) || 999;
-  var banner = document.getElementById('alertBanner');
-  if(bfr > 7){
-    banner.className = 'alert-banner show danger';
-    banner.textContent = '⚠️ BFR EXTREMO ('+bfr+') — Apalancamiento peligroso. Riesgo de liquidaciones en cascada si BTC pierde soporte.';
-  } else if(bfr > 5){
-    banner.className = 'alert-banner show warn';
-    banner.textContent = '⚡ BFR elevado ('+bfr+') — Vigilar. El mercado está apalancado al alza.';
-  } else if(etf < -300){
-    banner.className = 'alert-banner show warn';
-    banner.textContent = '📉 ETF Flows muy negativos ('+etf+'M$) — Institucionales saliendo. Vigilar si continúa.';
-  } else {
-    banner.className = 'alert-banner';
-  }
+  var bfr=parseFloat(manSigs.Bfr&&manSigs.Bfr.v)||0;
+  var etf=parseFloat(manSigs.Etf&&manSigs.Etf.v)||999;
+  var b=document.getElementById('alertBanner');
+  if(bfr>7){b.className='alert show danger';b.textContent='⚠️ BFR EXTREMO ('+bfr.toFixed(1)+') — Apalancamiento peligroso. Riesgo de liquidaciones en cascada si BTC pierde soporte.';}
+  else if(bfr>5){b.className='alert show warn';b.textContent='⚡ BFR elevado ('+bfr.toFixed(1)+') — Vigilar. El mercado está apalancado al alza.';}
+  else if(etf<-300){b.className='alert show warn';b.textContent='📉 ETF Flows muy negativos ('+etf+'M$) — Institucionales saliendo. Vigilar si continúa varios días.';}
+  else{b.className='alert';}
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // PHASE DETECTION
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function detectPhase(){
-  var eb = autoData.ethbtc || 0;
-  var dom = autoData.dom || 0;
-  var alt = parseFloat(manualSigs.Alt && manualSigs.Alt.v) || 0;
-  var etf = parseFloat(manualSigs.Etf && manualSigs.Etf.v) || 999;
-  var fg  = parseFloat(manualSigs.Fg  && manualSigs.Fg.v)  || 50;
-  var wh  = parseInt(manualSigs.Wh  && manualSigs.Wh.v)   || 2;
-  var bfr = parseFloat(manualSigs.Bfr && manualSigs.Bfr.v) || 0;
+  var eb=autoData.ethbtc||0;
+  var dom=parseFloat(manSigs.Dom&&manSigs.Dom.v)||0;
+  var alt=parseFloat(manSigs.Alt&&manSigs.Alt.v)||0;
+  var etf=parseFloat(manSigs.Etf&&manSigs.Etf.v)||999;
+  var fg=parseFloat(manSigs.Fg&&manSigs.Fg.v)||50;
+  var wh=parseInt(manSigs.Wh&&manSigs.Wh.v)||2;
+  var bfr=parseFloat(manSigs.Bfr&&manSigs.Bfr.v)||0;
   if(eb===0&&dom===0) return 'phase1';
-
   var bear=0;
   if(etf<-300)bear++;if(etf<-500)bear++;
   if(dom>63)bear++;if(alt<20)bear++;if(fg<20)bear++;
   if(wh===3)bear++;if(eb<0.024)bear++;
-
   var p3=0;
   if(alt>=75)p3+=3;if(dom<52)p3++;if(eb>=0.040)p3++;if(fg>=65)p3++;
-
   var dist=0;
   if(fg>80)dist++;if(bfr>8)dist++;if(alt>=75&&dom<50)dist++;
-
   var p2f=0;
   if(dom<56)p2f++;if(eb>=0.034)p2f++;if(alt>=55)p2f++;if(etf>=200)p2f++;
-
   var p2e=0;
   if(dom>=54&&dom<60)p2e++;if(eb>=0.028&&eb<0.036)p2e++;
   if(alt>=38&&alt<60)p2e++;if(etf>=100)p2e++;
-
   if(dist>=2&&p3>=3) return 'dist';
-  if(bear>=4) return 'bear';
-  if(p3>=4)   return 'phase3';
-  if(p2f>=3)  return 'phase2full';
-  if(p2e>=3&&bear<3) return 'phase2early';
+  if(bear>=4)return 'bear';
+  if(p3>=4)return 'phase3';
+  if(p2f>=3)return 'phase2full';
+  if(p2e>=3&&bear<3)return 'phase2early';
   return 'phase1';
 }
 
-var PHASE_CFG = {
-  bear:       {emoji:'🐻',color:'var(--r)', arrowPct:6,  progress:5,  name:'BEAR MARKET',            nextPhase:'₿ FASE 1',    nextDays:180,
-    desc:'El ciclo está en fase bajista. Capital saliendo. Prioridad: preservar lo invertido.',
-    action:'⚠️ No añadir posiciones. Si el bear se confirma varios días seguidos — revisar plan de salida de emergencia.'},
-  phase1:     {emoji:'₿', color:'var(--y)', arrowPct:24, progress:20, name:'FASE 1 — BTC LIDERA',    nextPhase:'🔄 F2 INICIO',nextDays:90,
-    desc:'Capital concentrado en Bitcoin. Las alts esperan. Fase de acumulación y paciencia. El staking trabaja.',
-    action:'⏳ Mantener posiciones en staking. La Fase 2 empieza cuando ETH/BTC gira al alza sostenida y Altseason supera 45.'},
-  phase2early:{emoji:'🔄',color:'var(--b)', arrowPct:45, progress:45, name:'FASE 2 INICIO — ROTACIÓN',nextPhase:'🚀 F2 PLENA',nextDays:60,
-    desc:'Capital empieza a rotar de BTC hacia alts. Primeras señales en ETH y alts grandes.',
-    action:'🎯 Preparar órdenes límite en TP1. Confirmar que ETH/BTC mantiene la subida varios días.'},
-  phase2full: {emoji:'🚀',color:'var(--g)', arrowPct:63, progress:65, name:'FASE 2 PLENA — ALTS ACTIVAS',nextPhase:'🎆 FASE 3',nextDays:90,
-    desc:'Rotación confirmada. Alts grandes superando a BTC. Los TPs empiezan a estar en rango.',
-    action:'⚡ Órdenes límite activas. Ejecutar sin dudar cuando el precio llegue al TP.'},
-  phase3:     {emoji:'🎆',color:'var(--p)', arrowPct:80, progress:82, name:'FASE 3 — ALTSEASON',      nextPhase:'📉 DIST.',   nextDays:60,
-    desc:'Altseason confirmada. Todo sube. Es el momento cumbre del ciclo.',
-    action:'🚨 EJECUTAR TPs SIN DUDAR. El mercado parece infinito — es exactamente cuando hay que vender.'},
-  dist:       {emoji:'📉',color:'#ff6b35', arrowPct:94, progress:95, name:'DISTRIBUCIÓN — SALIDA',   nextPhase:'🐻 BEAR',    nextDays:45,
-    desc:'El ciclo está en su techo. Los grandes están vendiendo.',
-    action:'🚨 VENDER TODO según el plan. No esperar más subidas.'}
+var PHASE_CFG={
+  bear:       {emoji:'🐻',color:'var(--r)', arrowPct:6,  progress:5,  name:'BEAR MARKET',            nextPhase:'₿ FASE 1',    nextDays:180, desc:'El ciclo está en fase bajista. Capital saliendo. Prioridad: preservar lo invertido.',action:'⚠️ No añadir posiciones. Si el bear se confirma varios días seguidos — revisar plan de salida.'},
+  phase1:     {emoji:'₿', color:'var(--y)', arrowPct:24, progress:20, name:'FASE 1 — BTC LIDERA',    nextPhase:'🔄 F2 INICIO',nextDays:90,  desc:'Capital concentrado en Bitcoin. Las alts esperan. El staking trabaja mientras tanto.',action:'⏳ Mantener en staking. Señal de cambio: ETH/BTC gira al alza + Altseason > 45 + Dom < 58%.'},
+  phase2early:{emoji:'🔄',color:'var(--b)', arrowPct:45, progress:45, name:'FASE 2 INICIO — ROTACIÓN',nextPhase:'🚀 F2 PLENA',nextDays:60,  desc:'Capital empieza a rotar de BTC hacia alts. Primeras señales en ETH y alts grandes.',action:'🎯 Preparar órdenes límite en TP1. Confirmar que ETH/BTC mantiene la subida varios días.'},
+  phase2full: {emoji:'🚀',color:'var(--g)', arrowPct:63, progress:65, name:'FASE 2 PLENA — ALTS ACTIVAS',nextPhase:'🎆 FASE 3',nextDays:90, desc:'Rotación confirmada. Alts grandes superando a BTC. Los TPs empiezan a estar en rango.',action:'⚡ Órdenes límite activas. Ejecutar sin dudar cuando el precio llegue.'},
+  phase3:     {emoji:'🎆',color:'#af52de', arrowPct:80, progress:82, name:'FASE 3 — ALTSEASON',      nextPhase:'📉 DIST.',   nextDays:60,  desc:'Altseason confirmada. Todo sube. Es el momento cumbre del ciclo.',action:'🚨 EJECUTAR TPs SIN DUDAR. El mercado parece infinito justo cuando hay que vender.'},
+  dist:       {emoji:'📉',color:'#ff6b35', arrowPct:94, progress:95, name:'DISTRIBUCIÓN — SALIDA',   nextPhase:'🐻 BEAR',    nextDays:45,  desc:'El ciclo está en su techo. Los grandes están vendiendo.',action:'🚨 VENDER TODO según el plan. No esperar más subidas.'}
 };
 
 function renderOdometer(){
-  var phase = detectPhase();
-  var cfg = PHASE_CFG[phase];
-
-  document.getElementById('odomEmoji').textContent = cfg.emoji;
-  var nameEl = document.getElementById('odomName');
-  nameEl.textContent = cfg.name; nameEl.style.color = cfg.color;
-  document.getElementById('odomDesc').textContent = cfg.desc;
-  document.getElementById('odomCard').style.borderColor = cfg.color.replace('var(--','').replace(')','');
-
-  var arr = document.getElementById('odomArrow');
-  if(arr) arr.style.left = cfg.arrowPct + '%';
-  document.getElementById('odomTri').style.borderTopColor = cfg.color;
-  document.getElementById('odomLine').style.background = cfg.color;
-
-  var segs = [
-    {k:'bear',fl:1,bg:'#ff4d4d',lbl:'BEAR'},
-    {k:'phase1',fl:2,bg:'#f5c842',lbl:'FASE 1'},
-    {k:'phase2early',fl:1.5,bg:'#4d8aff',lbl:'F2 INI'},
-    {k:'phase2full',fl:1.5,bg:'#00e87a',lbl:'F2 PLENA'},
-    {k:'phase3',fl:1.5,bg:'#af52de',lbl:'FASE 3'},
-    {k:'dist',fl:1,bg:'#ff6b35',lbl:'DIST.'}
+  var phase=detectPhase();
+  var cfg=PHASE_CFG[phase];
+  document.getElementById('odomEmoji').textContent=cfg.emoji;
+  var nm=document.getElementById('odomName');nm.textContent=cfg.name;nm.style.color=cfg.color;
+  document.getElementById('odomDesc').textContent=cfg.desc;
+  document.getElementById('odomCard').style.borderColor=cfg.color;
+  var arr=document.getElementById('odomArrow');if(arr)arr.style.left=cfg.arrowPct+'%';
+  document.getElementById('odomTri').style.borderTopColor=cfg.color;
+  document.getElementById('odomLine').style.background=cfg.color;
+  var segs=[
+    {k:'bear',fl:1,bg:'#ff4d4d',lbl:'BEAR'},{k:'phase1',fl:2,bg:'#f5c842',lbl:'FASE 1'},
+    {k:'phase2early',fl:1.5,bg:'#4d8aff',lbl:'F2 INI'},{k:'phase2full',fl:1.5,bg:'#00e87a',lbl:'F2 PLENA'},
+    {k:'phase3',fl:1.5,bg:'#af52de',lbl:'FASE 3'},{k:'dist',fl:1,bg:'#ff6b35',lbl:'DIST.'}
   ];
-  document.getElementById('odomSegs').innerHTML = segs.map(function(s){
-    var active = s.k === phase;
-    return '<div class="odom-seg" style="flex:'+s.fl+';background:'+s.bg+(active?'':'22')+';color:rgba(255,255,255,'+(active?'.9':'.35')+');font-weight:'+(active?'900':'600')+'">'+s.lbl+'</div>';
+  document.getElementById('odomSegs').innerHTML=segs.map(function(s){
+    var a=s.k===phase;
+    return '<div class="odom-seg" style="flex:'+s.fl+';background:'+s.bg+(a?'':'22')+';color:rgba(255,255,255,'+(a?'.9':'.35')+');font-weight:'+(a?'900':'600')+'">'+s.lbl+'</div>';
   }).join('');
-
-  var hist = getHistory();
-  var daysIn = 0;
+  var hist=getHistory(),daysIn=0;
   for(var i=0;i<hist.length;i++){if(hist[i]._phase===phase)daysIn++;else break;}
-  var daysEl = document.getElementById('odomDays');
-  daysEl.textContent = daysIn||'?'; daysEl.style.color = cfg.color;
-  var progEl = document.getElementById('odomProg');
-  progEl.textContent = cfg.progress+'%'; progEl.style.color = cfg.color;
-  var nextEl = document.getElementById('odomNext');
-  nextEl.textContent = cfg.nextPhase; nextEl.style.color = cfg.color; nextEl.style.fontSize = '9px';
-  document.getElementById('odomNextSub').textContent = '~'+cfg.nextDays+' días típico';
-  document.getElementById('odomAction').textContent = cfg.action;
-  document.getElementById('odomAction').style.borderColor = cfg.color;
+  var de=document.getElementById('odomDays');de.textContent=daysIn||'?';de.style.color=cfg.color;
+  var pe=document.getElementById('odomProg');pe.textContent=cfg.progress+'%';pe.style.color=cfg.color;
+  var ne=document.getElementById('odomNext');ne.textContent=cfg.nextPhase;ne.style.color=cfg.color;ne.style.fontSize='9px';
+  document.getElementById('odomNextSub').textContent='~'+cfg.nextDays+' días típico';
+  var ae=document.getElementById('odomAction');ae.textContent=cfg.action;ae.style.borderColor=cfg.color;
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // DROPDOWNS
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function tog(id){
-  var drop = document.getElementById('drop'+id);
-  var chev = document.getElementById('chev'+id);
-  var open = drop.classList.toggle('open');
-  chev.classList.toggle('open', open);
+  var d=document.getElementById('drop'+id);
+  var c=document.getElementById('chev'+id);
+  var o=d.classList.toggle('open');c.classList.toggle('open',o);
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // TABS
-// ══════════════════════════════════════
-function goTab(name){
+// ═══════════════════════════════════════════════════════════════
+function goTab(n){
   ['datos','analisis','senal','historial'].forEach(function(t){
-    document.getElementById('view-'+t).classList.toggle('active', t===name);
-    document.getElementById('tab-'+t).classList.toggle('active', t===name);
+    document.getElementById('view-'+t).classList.toggle('active',t===n);
+    document.getElementById('tab-'+t).classList.toggle('active',t===n);
   });
-  if(name==='analisis') renderAnalysis();
-  if(name==='senal') renderSignal();
-  if(name==='historial') renderHistorial();
+  if(n==='analisis') renderAnalysis();
+  if(n==='senal') renderSignal();
+  if(n==='historial') renderHistorial();
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // SAVE / LOAD
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function saveData(){
-  var data = {_date:new Date().toDateString(), _phase:detectPhase(), _ts:Date.now()};
+  var data={_date:new Date().toDateString(),_phase:detectPhase(),_ts:Date.now()};
   MANUAL_IDS.forEach(function(id){
-    var inp = document.getElementById('inp'+id);
-    if(inp) data[id] = inp.value;
+    var inp=document.getElementById('inp'+id);if(inp)data[id]=inp.value;
   });
-  // Save auto data too
-  data._btc = autoData.btc;
-  data._dom = autoData.dom;
-  data._ethbtc = autoData.ethbtc;
-  data._total2 = autoData.total2;
-  data._total3 = autoData.total3;
-
-  localStorage.setItem('cDash_v4', JSON.stringify(data));
-
-  var hist = getHistory();
-  var today = new Date().toDateString();
-  hist = hist.filter(function(h){return h._date!==today;});
+  data._btc=autoData.btc;
+  data._ethbtc=autoData.ethbtc;
+  localStorage.setItem('cDash_v5',JSON.stringify(data));
+  var hist=getHistory();
+  var today=new Date().toDateString();
+  hist=hist.filter(function(h){return h._date!==today;});
   hist.unshift(data);
-  if(hist.length>90) hist = hist.slice(0,90);
+  if(hist.length>90)hist=hist.slice(0,90);
   saveHistory(hist);
-
-  var ok = document.getElementById('saveOk');
-  ok.style.display = 'block';
-  setTimeout(function(){ok.style.display='none';},2500);
   renderConfirmation();
+  var ok=document.getElementById('saveOk');ok.style.display='block';
+  setTimeout(function(){ok.style.display='none';},2500);
 }
 
 function loadData(){
   try{
-    var raw = localStorage.getItem('cDash_v4');
-    if(!raw) return;
-    var data = JSON.parse(raw);
+    var raw=localStorage.getItem('cDash_v5');
+    if(!raw)return;
+    var data=JSON.parse(raw);
     MANUAL_IDS.forEach(function(id){
-      var inp = document.getElementById('inp'+id);
-      if(inp && data[id]!==undefined) inp.value = data[id];
+      var inp=document.getElementById('inp'+id);
+      if(inp&&data[id]!==undefined)inp.value=data[id];
     });
     calc();
   }catch(e){}
 }
 
-function getHistory(){try{return JSON.parse(localStorage.getItem('cDash_hist2')||'[]');}catch(e){return[];}}
-function saveHistory(arr){try{localStorage.setItem('cDash_hist2',JSON.stringify(arr));}catch(e){}}
-function clearHistory(){if(confirm('¿Borrar todo el historial?')){localStorage.removeItem('cDash_hist2');renderHistorial();}}
+function getHistory(){try{return JSON.parse(localStorage.getItem('cDash_hist3')||'[]');}catch(e){return[];}}
+function saveHistory(arr){try{localStorage.setItem('cDash_hist3',JSON.stringify(arr));}catch(e){}}
+function clearHistory(){if(confirm('¿Borrar todo el historial?')){localStorage.removeItem('cDash_hist3');renderHistorial();}}
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // ANALYSIS
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function renderAnalysis(){
-  var el = document.getElementById('aContainer');
-  var cards = [];
-
-  // BTC auto
-  if(autoData.btc > 0){
-    if(autoData.btc >= 100000) cards.push({type:'bull',tags:['BTC','BULL RUN'],text:'BTC por encima de $100K — bull run activo. Tu posición en BTC está en verde.'});
-    else if(autoData.btc >= 80000) cards.push({type:'watch',tags:['BTC','VIGILAR'],text:'BTC en recuperación entre $80K-$100K. Por debajo de tu breakeven ($88.4K). Mantener y esperar catalizadores.'});
-    else cards.push({type:'bear',tags:['BTC','RIESGO'],text:'BTC bajo $80K — lejos del breakeven ($88.4K). Corrección activa. No añadir posiciones.'});
-
-    // MA reference
-    if(autoData.btc < 82400){
-      cards.push({type:'watch',tags:['BTC','MA200'],text:'BTC bajo la media de 200 días ($82.4K). Esta es la clave de la Fase 2 — cuando la rompa y mantenga, las alts despertarán.'});
-    }
+  var el=document.getElementById('aContainer');
+  var cards=[];
+  if(autoData.btc>0){
+    if(autoData.btc>=100000) cards.push({type:'bull',tags:['BTC','BULL RUN'],text:'BTC por encima de $100K — bull run activo.'});
+    else if(autoData.btc>=80000) cards.push({type:'watch',tags:['BTC','VIGILAR'],text:'BTC en recuperación entre $80K-$100K. Por debajo de tu breakeven ($88.4K). Mantener y esperar catalizadores.'});
+    else cards.push({type:'bear',tags:['BTC','RIESGO'],text:'BTC bajo $80K — lejos del breakeven ($88.4K). Corrección activa. Soporte crítico en $72.4K.'});
+    if(autoData.btc<82400) cards.push({type:'watch',tags:['BTC','MA200'],text:'BTC bajo la media de 200 días ($82.4K). La señal más importante del ciclo — cuando la rompa y mantenga, las alts despertarán.'});
   }
-
-  // ETH/BTC
-  var eb = autoData.ethbtc || 0;
-  if(eb > 0){
-    if(eb < 0.028) cards.push({type:'bear',tags:['ETH/BTC','FASE 1'],text:'ETH/BTC en mínimos ('+eb.toFixed(5)+') — capital concentrado en BTC. Las alts siguen dormidas. No hay rotación todavía.'});
-    else if(eb < 0.034) cards.push({type:'watch',tags:['ETH/BTC','TRANSICIÓN'],text:'ETH/BTC en zona neutral ('+eb.toFixed(5)+'). Necesita superar 0.034 sostenidamente para confirmar rotación.'});
+  var eb=autoData.ethbtc||0;
+  if(eb>0){
+    if(eb<0.028) cards.push({type:'bear',tags:['ETH/BTC','FASE 1'],text:'ETH/BTC en zona baja ('+eb.toFixed(5)+') — capital concentrado en BTC. No hay rotación hacia alts todavía.'});
+    else if(eb<0.034) cards.push({type:'watch',tags:['ETH/BTC','TRANSICIÓN'],text:'ETH/BTC en zona neutral ('+eb.toFixed(5)+'). Necesita superar 0.034 sostenidamente para confirmar rotación.'});
     else cards.push({type:'bull',tags:['ETH/BTC','ROTACIÓN'],text:'ETH/BTC subiendo ('+eb.toFixed(5)+') — señal de rotación hacia alts iniciada.'});
   }
-
-  // BFR
-  var bfr = parseFloat(manualSigs.Bfr && manualSigs.Bfr.v) || 0;
-  if(bfr !== 0){
-    if(bfr > 7) cards.push({type:'bear',tags:['BFR','⚠️ EXTREMO'],text:'BFR en '+bfr+' — nivel peligroso. Mercado muy apalancado al alza mientras el precio baja. Riesgo de liquidaciones en cascada.'});
-    else if(bfr > 4) cards.push({type:'watch',tags:['BFR','ELEVADO'],text:'BFR en '+bfr+' — apalancamiento moderado-alto. Vigilar si sigue subiendo.'});
-    else if(bfr < 0) cards.push({type:'bull',tags:['BFR','SQUEEZE'],text:'BFR negativo ('+bfr+') — shorts pagando a longs. Posible squeeze alcista próximo.'});
-    else cards.push({type:'info',tags:['BFR','SANO'],text:'BFR en zona sana ('+bfr+') — mercado equilibrado sin riesgo de liquidaciones inmediatas.'});
+  var dom=parseFloat(manSigs.Dom&&manSigs.Dom.v)||0;
+  if(dom>0){
+    if(dom<58) cards.push({type:'bull',tags:['DOMINANCE','ROTACIÓN'],text:'Dominancia bajo 58% — capital empezando a rotar hacia alts. Señal positiva para tu cartera.'});
+    else if(dom<62) cards.push({type:'watch',tags:['DOMINANCE','NEUTRAL'],text:'Dominancia en '+dom.toFixed(1)+'% — BTC sigue liderando. Vigilar si sigue bajando del 58%.'});
+    else cards.push({type:'bear',tags:['DOMINANCE','ALTS DÉBILES'],text:'Dominancia por encima del 62% — las alts están sangrando en términos relativos.'});
   }
-
-  // ETF
-  var etf = parseFloat(manualSigs.Etf && manualSigs.Etf.v) || 999;
-  if(etf !== 999){
-    if(etf < -300) cards.push({type:'bear',tags:['ETF','SALIDAS'],text:'ETF flows muy negativos ('+etf+'M$) — institucionales saliendo. Señal bajista importante a vigilar.'});
-    else if(etf < 0) cards.push({type:'watch',tags:['ETF','VIGILAR'],text:'ETF flows negativos ('+etf+'M$). Vigilar si se mantiene varios días.'});
-    else if(etf > 300) cards.push({type:'bull',tags:['ETF','ENTRADA'],text:'ETF flows positivos fuertes (+'+etf+'M$) — institucionales comprando. Señal alcista clara.'});
-    else cards.push({type:'info',tags:['ETF','MODERADO'],text:'ETF flows positivos moderados (+'+etf+'M$). Demanda institucional activa.'});
+  var bfr=parseFloat(manSigs.Bfr&&manSigs.Bfr.v)||0;
+  if(bfr!==0){
+    if(bfr>7) cards.push({type:'bear',tags:['BFR','⚠️ EXTREMO'],text:'BFR en '+bfr.toFixed(1)+' — nivel peligroso. Riesgo de liquidaciones en cascada.'});
+    else if(bfr>4) cards.push({type:'watch',tags:['BFR','ELEVADO'],text:'BFR en '+bfr.toFixed(1)+' — apalancamiento moderado-alto. Vigilar evolución.'});
+    else if(bfr<0) cards.push({type:'bull',tags:['BFR','SQUEEZE'],text:'BFR negativo ('+bfr.toFixed(1)+') — shorts pagando a longs. Posible squeeze alcista próximo.'});
+    else cards.push({type:'info',tags:['BFR','SANO'],text:'BFR en zona sana ('+bfr.toFixed(1)+') — mercado equilibrado sin riesgo inmediato.'});
   }
-
-  // Altseason
-  var alt = parseFloat(manualSigs.Alt && manualSigs.Alt.v) || 0;
-  if(alt > 0){
-    if(alt >= 75) cards.push({type:'bull',tags:['ALTSEASON','✅ CONFIRMADA'],text:'Altseason Index >75 — ¡altseason confirmada! Ejecutar TPs.'});
-    else if(alt >= 50) cards.push({type:'watch',tags:['ALTSEASON','INICIO'],text:'Altseason Index '+alt+'/100 — rotación iniciada pero sin confirmar.'});
+  var etf=parseFloat(manSigs.Etf&&manSigs.Etf.v)||999;
+  if(etf!==999){
+    if(etf<-300) cards.push({type:'bear',tags:['ETF','SALIDAS'],text:'ETF flows muy negativos ('+etf+'M$) — institucionales saliendo. Vigilar si son varios días consecutivos.'});
+    else if(etf<0) cards.push({type:'watch',tags:['ETF','VIGILAR'],text:'ETF flows negativos ('+etf+'M$). Vigilar si continúa.'});
+    else if(etf>300) cards.push({type:'bull',tags:['ETF','ENTRADA'],text:'ETF flows positivos fuertes (+'+etf+'M$) — institucionales comprando. Señal alcista clara.'});
+    else cards.push({type:'info',tags:['ETF','MODERADO'],text:'ETF flows positivos moderados. Demanda institucional activa.'});
+  }
+  var alt=parseFloat(manSigs.Alt&&manSigs.Alt.v)||0;
+  if(alt>0){
+    if(alt>=75) cards.push({type:'bull',tags:['ALTSEASON','✅ CONFIRMADA'],text:'Altseason Index >75 — ¡altseason confirmada! Ejecutar TPs sin dudar.'});
+    else if(alt>=50) cards.push({type:'watch',tags:['ALTSEASON','INICIO'],text:'Altseason Index '+alt+'/100 — rotación iniciada pero sin confirmar todavía.'});
     else cards.push({type:'bear',tags:['ALTSEASON','DORMIDA'],text:'Altseason Index '+alt+'/100 — Bitcoin Season. Tus alts siguen esperando su turno.'});
   }
-
-  // Phase
-  var phase = detectPhase();
-  var cfg = PHASE_CFG[phase];
-  cards.push({type:'info',tags:['FASE ACTUAL',cfg.name.split('—')[0].trim()],text:cfg.desc+' '+cfg.action});
-
-  el.innerHTML = cards.map(function(c){
+  var phase=detectPhase();
+  var cfg=PHASE_CFG[phase];
+  cards.push({type:'info',tags:['FASE',cfg.name.split('—')[0].trim()],text:cfg.desc+' '+cfg.action});
+  el.innerHTML=cards.map(function(c){
     return '<div class="a-card '+c.type+'">'
       +'<div class="a-tags">'+c.tags.map(function(t){return '<span class="a-tag '+c.type+'">'+t+'</span>';}).join('')+'</div>'
-      +'<div class="a-text">'+c.text+'</div>'
-      +'</div>';
-  }).join('') || '<div style="text-align:center;padding:20px;color:var(--txt3)">Sin datos suficientes</div>';
+      +'<div class="a-text">'+c.text+'</div></div>';
+  }).join('')||'<div style="text-align:center;padding:20px;color:var(--txt3)">Introduce los datos para ver el análisis</div>';
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // SIGNAL
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function renderSignal(){
   var g=0,r=0,tot=0;
-  ['btc','ethbtc','dom','total2','total3'].forEach(function(k){
-    var s=getAutoSig(k);if(s!=='n'){tot++;if(s==='g')g++;else if(s==='r')r++;}
-  });
-  MANUAL_IDS.forEach(function(id){
-    var ss=manualSigs[id];if(ss&&ss.v&&ss.s!=='n'){tot++;if(ss.s==='g')g++;else if(ss.s==='r')r++;}
-  });
+  ['btc','ethbtc'].forEach(function(k){var s=getAutoSig(k);if(s!=='n'){tot++;if(s==='g')g++;else if(s==='r')r++;}});
+  MANUAL_IDS.forEach(function(id){var ss=manSigs[id];if(ss&&ss.v&&ss.s!=='n'){tot++;if(ss.s==='g')g++;else if(ss.s==='r')r++;}});
   var pG=tot?g/tot:0,pR=tot?r/tot:0;
   var emoji,action,text,color;
-  if(pG>=0.6){emoji='🟢';action='MANTENER Y PREPARAR TPs';color='var(--g)';text='Señales mayoritariamente positivas. Mantener todas las posiciones. Preparar ejecución de TPs si algún token se acerca.';}
+  if(pG>=0.6){emoji='🟢';action='MANTENER Y PREPARAR TPs';color='var(--g)';text='Señales mayoritariamente positivas. Mantener todas las posiciones. Preparar ejecución si algún token se acerca al TP1.';}
   else if(pR>=0.5){emoji='🔴';action='PRECAUCIÓN — REVISAR PLAN';color='var(--r)';text='Señales bajistas dominantes. No añadir posiciones. Vigilar el detector de bear market.';}
   else{emoji='🟡';action='MANTENER — SIN ACCIÓN';color='var(--y)';text='Mercado mixto. La estrategia correcta es mantener y no actuar impulsivamente. Esperar confirmación.';}
-
   document.getElementById('sigEmoji').textContent=emoji;
   var sa=document.getElementById('sigAction');sa.textContent=action;sa.style.color=color;
   document.getElementById('sigText').textContent=text;
 
-  // Forecast
-  var fc=[
-    {day:'Mañana',sig:pG>0.5?'g':pR>0.5?'r':'y',text:'BTC en $73K. Soporte crítico en $72.4K. Si aguanta, posible rebote técnico. BFR extremo crea riesgo de liquidaciones.'},
+  var bfr=parseFloat(manSigs.Bfr&&manSigs.Bfr.v)||0;
+  var etfv=parseFloat(manSigs.Etf&&manSigs.Etf.v)||0;
+  var fg2=parseFloat(manSigs.Fg&&manSigs.Fg.v)||50;
+  var wh2=parseInt(manSigs.Wh&&manSigs.Wh.v)||2;
+  var btc=autoData.btc||0;
+  var alt2=parseFloat(manSigs.Alt&&manSigs.Alt.v)||50;
+  var dom=parseFloat(manSigs.Dom&&manSigs.Dom.v)||60;
+
+  document.getElementById('fcContainer').innerHTML=[
+    {day:'Próximos días',sig:pG>0.5?'g':pR>0.5?'r':'y',text:'BTC en $'+Math.round(btc/1000)+'K. Dominancia en '+dom.toFixed(1)+'% — clave que se mantenga bajo 60%. BFR bajando = mercado saneándose. ETF flows — señal a vigilar.'},
     {day:'Semana 2-6 junio',sig:'y',text:'SWIFT live con 25+ bancos en junio. Dynamic Resharding NEAR en junio. Estos catalizadores pueden mover precio independientemente del mercado general.'},
-    {day:'Junio 2026',sig:pG>0.5?'g':'y',text:'Clarity Act voto Senado pendiente. Kevin Warsh (nuevo Fed) puede hacer declaraciones dovish. Mes de catalizadores regulatorios.'}
-  ];
-  document.getElementById('fcContainer').innerHTML=fc.map(function(f){
+    {day:'Junio 2026',sig:pG>0.5?'g':'y',text:'Clarity Act voto Senado pendiente. Kevin Warsh (nuevo Fed) puede hacer declaraciones dovish. Mes de catalizadores regulatorios clave.'}
+  ].map(function(f){
     return '<div class="fc-card"><div class="fc-day">'+f.day.toUpperCase()+'</div>'
       +'<div class="fc-sig '+f.sig+'">'+({g:'🟢 ALCISTA',y:'🟡 NEUTRAL',r:'🔴 BAJISTA'}[f.sig])+'</div>'
       +'<div class="fc-text">'+f.text+'</div></div>';
   }).join('');
-
-  // Bear detector
-  var bfr=parseFloat(manualSigs.Bfr&&manualSigs.Bfr.v)||0;
-  var etfv=parseFloat(manualSigs.Etf&&manualSigs.Etf.v)||0;
-  var fg2=parseFloat(manualSigs.Fg&&manualSigs.Fg.v)||50;
-  var wh2=parseInt(manualSigs.Wh&&manualSigs.Wh.v)||2;
-  var btc=autoData.btc||0;
-  var alt2=parseFloat(manualSigs.Alt&&manualSigs.Alt.v)||50;
 
   var bearSignals=[
     {lbl:'ETF flows negativos múltiples días',val:etfv<0?'⚠️ '+etfv+'M':'✓ OK',ok:etfv>=0},
@@ -1236,148 +1091,114 @@ function renderSignal(){
     {lbl:'Altseason cae por debajo de 20',val:alt2>0&&alt2<20?'⚠️ '+alt2+'/100':'✓ OK',ok:alt2>=20||alt2===0},
     {lbl:'BFR extremo sostenido >8',val:bfr>8?'⚠️ '+bfr.toFixed(1):'✓ '+bfr.toFixed(1),ok:bfr<=8}
   ];
-  var bearCount=bearSignals.filter(function(b){return!b.ok;}).length;
-  var bearSem=bearCount>=4?'🔴 ALERTA REAL':bearCount>=2?'🟡 VIGILAR':'🟢 CICLO ACTIVO';
+  var bc=bearSignals.filter(function(b){return!b.ok;}).length;
   document.getElementById('bearContainer').innerHTML='<div class="fc-card">'
-    +'<div class="fc-day">DETECTOR BEAR MARKET — '+bearSem+'</div>'
+    +'<div class="fc-day">DETECTOR BEAR MARKET — '+(bc>=4?'🔴 ALERTA REAL':bc>=2?'🟡 VIGILAR':'🟢 CICLO ACTIVO')+'</div>'
     +bearSignals.map(function(b){
-      return '<div class="bear-row"><span style="font-size:12px">'+(b.ok?'✅':'⚠️')+'</span>'
+      return '<div class="bear-row"><span style="font-size:11px">'+(b.ok?'✅':'⚠️')+'</span>'
         +'<div class="bear-lbl">'+b.lbl+'</div>'
         +'<div class="bear-val" style="color:'+(b.ok?'var(--g)':'var(--r)')+'">'+b.val+'</div></div>';
     }).join('')
-    +'<div style="margin-top:8px;font-size:9px;color:var(--txt3)">Señales activas: '+bearCount+'/6 — '
-    +(bearCount>=4?'Salida de emergencia':bearCount>=2?'Vigilancia activa':'Sin señales de alerta')+'</div>'
-    +'</div>';
+    +'<div style="margin-top:8px;font-size:9px;color:var(--txt3)">Señales activas: '+bc+'/6 — '+(bc>=4?'Salida de emergencia':bc>=2?'Vigilancia activa':'Sin señales de alerta')+'</div></div>';
 
-  // Confirmation
   renderConfirmation();
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // CONFIRMATION
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 function renderConfirmation(){
-  var hist = getHistory();
+  var hist=getHistory();
   var CRITERIA=[
-    {id:'dom',label:'BTC Dominance < 60%',needed:3,
-     check:function(h){return (h._dom||0)<60;},
-     hint:'< 60% durante 3 días → Rotación iniciada'},
-    {id:'ethbtc',label:'ETH/BTC > 0.028',needed:3,
-     check:function(h){return (h._ethbtc||0)>=0.028;},
-     hint:'> 0.028 durante 3 días → Capital rotando hacia alts'},
-    {id:'total2',label:'TOTAL2 sobre $1T',needed:2,
-     check:function(h){return (h._total2||0)>=1000;},
-     hint:'> $1T durante 2 días → Alts grandes en movimiento'},
-    {id:'alt',label:'Altseason > 40',needed:3,
-     check:function(h){return parseFloat(h.Alt||0)>=40;},
-     hint:'> 40 durante 3 días → Altseason despertando'},
-    {id:'bfr',label:'BFR zona sana (0-4)',needed:2,
-     check:function(h){var v=parseFloat(h.Bfr||0);return v>=0&&v<=4;},
-     hint:'0-4 durante 2 días → Sin riesgo liquidación'},
-    {id:'etf',label:'ETF Flows positivos',needed:2,
-     check:function(h){return parseFloat(h.Etf||0)>=0;},
-     hint:'≥0 durante 2 días → Institucionales no vendiendo'}
+    {id:'dom',  label:'BTC Dominance < 60%',needed:3,check:function(h){return parseFloat(h.Dom||100)<60;},hint:'< 60% durante 3 días → Rotación iniciada'},
+    {id:'eth',  label:'ETH/BTC > 0.028',    needed:3,check:function(h){return (h._ethbtc||0)>=0.028;},   hint:'> 0.028 durante 3 días → Capital rotando hacia alts'},
+    {id:'t2',   label:'TOTAL2 sobre $1T',    needed:2,check:function(h){return parseFloat(h.Total2||0)>=1000;},hint:'> $1T durante 2 días → Alts grandes en movimiento'},
+    {id:'alt',  label:'Altseason > 40',      needed:3,check:function(h){return parseFloat(h.Alt||0)>=40;},hint:'> 40 durante 3 días → Altseason despertando'},
+    {id:'bfr',  label:'BFR zona sana (0-4)', needed:2,check:function(h){var v=parseFloat(h.Bfr||0);return v>=0&&v<=4;},hint:'0-4 durante 2 días → Sin riesgo liquidación'},
+    {id:'etf',  label:'ETF Flows positivos', needed:2,check:function(h){return parseFloat(h.Etf||0)>=0;},hint:'≥ 0 durante 2 días → Institucionales no vendiendo'}
   ];
-
   var results=CRITERIA.map(function(c){
     var streak=0;
     for(var i=0;i<hist.length;i++){if(c.check(hist[i]))streak++;else break;}
-    var confirmed=streak>=c.needed;
     var pct=Math.min(100,Math.round(streak/c.needed*100));
-    return{id:c.id,label:c.label,streak:streak,needed:c.needed,confirmed:confirmed,pct:pct,hint:c.hint};
+    return{label:c.label,streak:streak,needed:c.needed,confirmed:streak>=c.needed,pct:pct,hint:c.hint};
   });
-
-  var confPanel = document.getElementById('confPanel');
-  if(!confPanel) return;
-
-  if(hist.length<2){
-    confPanel.innerHTML='<div style="padding:14px;font-size:10px;color:var(--txt3)">Guarda al menos 2 días para ver la confirmación</div>';
-    return;
-  }
-
-  confPanel.innerHTML = results.map(function(r){
+  var cp=document.getElementById('confPanel');
+  if(!cp) return;
+  if(hist.length<2){cp.innerHTML='<div style="padding:14px;font-size:10px;color:var(--txt3)">Guarda al menos 2 días para ver la confirmación</div>';return;}
+  cp.innerHTML=results.map(function(r){
     var col=r.confirmed?'var(--g)':r.pct>=50?'var(--y)':'var(--txt3)';
     var icon=r.confirmed?'✅':r.pct>=50?'⚡':'○';
     return '<div class="conf-row">'
-      +'<div class="conf-icon">'+icon+'</div>'
-      +'<div class="conf-lbl">'+r.label+'<div style="font-size:8px;color:var(--txt3);margin-top:2px">'+r.hint+'</div></div>'
-      +'<div style="text-align:right">'
+      +'<span style="font-size:11px;width:16px;flex-shrink:0">'+icon+'</span>'
+      +'<div class="conf-lbl">'+r.label+'<div style="font-size:8px;color:var(--txt3);margin-top:1px">'+r.hint+'</div></div>'
+      +'<div style="text-align:right;flex-shrink:0">'
       +'<div class="conf-streak" style="color:'+col+'">'+r.streak+'/'+r.needed+'d</div>'
-      +'<div class="conf-bar-wrap" style="margin-top:4px;margin-left:auto"><div class="conf-bar" style="width:'+r.pct+'%;background:'+col+'"></div></div>'
+      +'<div class="conf-bar-wrap" style="margin-top:3px;margin-left:auto"><div class="conf-bar" style="width:'+r.pct+'%;background:'+col+'"></div></div>'
       +'</div></div>';
   }).join('');
-
-  var confirmed=results.filter(function(r){return r.confirmed;}).length;
-  var partial=results.filter(function(r){return r.pct>=50&&!r.confirmed;}).length;
+  var conf=results.filter(function(r){return r.confirmed;}).length;
+  var part=results.filter(function(r){return r.pct>=50&&!r.confirmed;}).length;
   var verdict='',vc='var(--txt2)',vb='var(--border2)';
-  if(confirmed>=4){verdict='🚀 CAMBIO A FASE 2 CONFIRMADO — '+confirmed+'/6 criterios cumplidos varios días seguidos. Momento de actuar.';vc='var(--g)';vb='var(--gbdr)';}
-  else if(confirmed>=2||partial>=3){verdict='⚡ TRANSICIÓN EN PROCESO — '+confirmed+' señales confirmadas, '+partial+' a mitad. Vigilar sin actuar aún.';vc='var(--y)';vb='var(--ybdr)';}
-  else{verdict='⏳ FASE 1 CONFIRMADA — Sin señales de cambio sostenido. Un día positivo no confirma nada. Mantener en staking.';vc='var(--txt2)';}
-
-  var vEl=document.getElementById('confVerdict');
-  if(vEl){vEl.textContent=verdict;vEl.style.color=vc;vEl.style.borderColor=vb;}
+  if(conf>=4){verdict='🚀 CAMBIO A FASE 2 CONFIRMADO — '+conf+'/6 criterios cumplidos varios días seguidos. Actuar: preparar órdenes límite.';vc='var(--g)';vb='var(--gbdr)';}
+  else if(conf>=2||part>=3){verdict='⚡ TRANSICIÓN EN PROCESO — '+conf+' señales confirmadas, '+part+' a mitad. Vigilar sin actuar aún. Si se mantiene 2-3 días más → cambio de fase inminente.';vc='var(--y)';vb='var(--ybdr)';}
+  else{verdict='⏳ FASE 1 CONFIRMADA — Sin señales de cambio sostenido. Un día positivo no confirma nada. Mantener en staking y seguir monitorizando.';}
+  var ve=document.getElementById('confVerdict');
+  if(ve){ve.textContent=verdict;ve.style.color=vc;ve.style.borderColor=vb;}
 }
 
-// ══════════════════════════════════════
-// HISTORIAL
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
+// HISTORY
+// ═══════════════════════════════════════════════════════════════
 function renderHistorial(){
-  var hist = getHistory();
-  if(hist.length === 0){
+  var hist=getHistory();
+  if(!hist.length){
     document.getElementById('miniCharts').innerHTML='<div style="text-align:center;padding:30px;color:var(--txt3);font-size:12px">Guarda al menos 2 días de datos</div>';
     document.getElementById('histTable').innerHTML='<tr><td style="text-align:center;color:var(--txt3);padding:20px">Sin datos todavía</td></tr>';
     return;
   }
-
-  var chrono = hist.slice().reverse();
-
-  // Mini charts
+  var chrono=hist.slice().reverse();
   var chartDefs=[
-    {key:'_btc',lbl:'BTC Precio',color:'#f7931a',fmt:function(v){return '$'+Math.round(v/1000)+'K';},scale:function(v){return Math.min(100,Math.max(0,(v-60000)/(200000-60000)*100));}},
-    {key:'_dom',lbl:'BTC Dominance',color:'#f5c842',fmt:function(v){return v.toFixed(1)+'%';},scale:function(v){return Math.min(100,Math.max(0,(70-v)/20*100));}},
-    {key:'_ethbtc',lbl:'ETH/BTC',color:'#627eea',fmt:function(v){return v.toFixed(5);},scale:function(v){return Math.min(100,Math.max(0,(v-0.02)/(0.06-0.02)*100));}},
-    {key:'Alt',lbl:'Altseason Index',color:'#00e87a',fmt:function(v){return v+'/100';},scale:function(v){return Math.min(100,Math.max(0,parseFloat(v)));}},
-    {key:'Fg',lbl:'Fear & Greed',color:'#ff9500',fmt:function(v){return v+'/100';},scale:function(v){return Math.min(100,Math.max(0,parseFloat(v)));}},
-    {key:'Bfr',lbl:'BFR Funding Rate',color:'#ff4d4d',fmt:function(v){return parseFloat(v).toFixed(1);},scale:function(v){return Math.min(100,Math.max(0,(parseFloat(v)+5)/15*100));}}
+    {key:'_btc',    lbl:'BTC Precio',      color:'#f7931a',fmt:function(v){return '$'+Math.round(v/1000)+'K';},scale:function(v){return Math.min(100,Math.max(0,(v-60000)/(200000-60000)*100));}},
+    {key:'Dom',     lbl:'BTC Dominance',   color:'#f5c842',fmt:function(v){return parseFloat(v).toFixed(1)+'%';},scale:function(v){return Math.min(100,Math.max(0,(70-parseFloat(v))/20*100));}},
+    {key:'_ethbtc', lbl:'ETH/BTC',         color:'#627eea',fmt:function(v){return parseFloat(v).toFixed(5);},scale:function(v){return Math.min(100,Math.max(0,(parseFloat(v)-0.02)/(0.06-0.02)*100));}},
+    {key:'Alt',     lbl:'Altseason Index', color:'#00e87a',fmt:function(v){return v+'/100';},scale:function(v){return Math.min(100,Math.max(0,parseFloat(v)));}},
+    {key:'Fg',      lbl:'Fear & Greed',    color:'#ff9500',fmt:function(v){return v+'/100';},scale:function(v){return Math.min(100,Math.max(0,parseFloat(v)));}},
+    {key:'Bfr',     lbl:'BFR Funding',     color:'#ff4d4d',fmt:function(v){return parseFloat(v).toFixed(1);},scale:function(v){return Math.min(100,Math.max(0,(parseFloat(v)+5)/15*100));}}
   ];
-
-  var chartsHtml = '';
+  var chartsHtml='';
   chartDefs.forEach(function(cd){
-    var vals = chrono.map(function(h){return h[cd.key];}).filter(function(v){return v!==undefined&&v!=='';});
-    if(vals.length < 2) return;
-    var allVals = chrono.map(function(h){return h[cd.key];});
-    var dates = chrono.map(function(h){var d=new Date(h._date);return d.getDate()+'/'+(d.getMonth()+1);});
-    var W=340,H=55,pad=8;
-    var n=allVals.length;
+    var vals=chrono.map(function(h){return h[cd.key];}).filter(function(v){return v!==undefined&&v!==''&&v!==null;});
+    if(vals.length<2)return;
+    var allVals=chrono.map(function(h){return h[cd.key];});
+    var dates=chrono.map(function(h){var d=new Date(h._date);return d.getDate()+'/'+(d.getMonth()+1);});
+    var W=340,H=55,pad=8,n=allVals.length;
     var points=allVals.map(function(v,i){
       var x=pad+(i/(Math.max(n-1,1)))*(W-pad*2);
       var y=H-pad-(cd.scale(v||'0')/100)*(H-pad*2);
-      return{x:x.toFixed(1),y:y.toFixed(1),v:v};
+      return{x:x.toFixed(1),y:y.toFixed(1)};
     });
-    var polyline=points.map(function(p){return p.x+','+p.y;}).join(' ');
+    var poly=points.map(function(p){return p.x+','+p.y;}).join(' ');
     var last=allVals[allVals.length-1];
-    var lastColor=cd.scale(last||'0')>60?'var(--g)':cd.scale(last||'0')>35?'var(--y)':'var(--r)';
-    var area=points[0].x+','+(H-pad)+' '+polyline+' '+points[points.length-1].x+','+(H-pad);
-
+    var lc=cd.scale(last||'0')>60?'var(--g)':cd.scale(last||'0')>35?'var(--y)':'var(--r)';
+    var area=points[0].x+','+(H-pad)+' '+poly+' '+points[points.length-1].x+','+(H-pad);
     chartsHtml+='<div class="hist-chart">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">'
       +'<span style="font-size:11px;font-weight:700;color:var(--txt)">'+cd.lbl+'</span>'
-      +'<span style="font-size:12px;font-weight:900;font-family:Space Mono,monospace;color:'+lastColor+'">'+cd.fmt(last||'0')+'</span>'
-      +'</div>'
+      +'<span style="font-size:12px;font-weight:900;font-family:Space Mono,monospace;color:'+lc+'">'+cd.fmt(last||'0')+'</span></div>'
       +'<svg width="100%" viewBox="0 0 '+W+' '+(H+12)+'" style="overflow:visible">'
       +'<polygon points="'+area+'" fill="'+cd.color+'" opacity="0.1"/>'
-      +'<polyline points="'+polyline+'" fill="none" stroke="'+cd.color+'" stroke-width="2" stroke-linejoin="round"/>'
-      +'<circle cx="'+points[points.length-1].x+'" cy="'+points[points.length-1].y+'" r="4" fill="'+lastColor+'" stroke="var(--bg)" stroke-width="2"/>'
+      +'<polyline points="'+poly+'" fill="none" stroke="'+cd.color+'" stroke-width="2" stroke-linejoin="round"/>'
+      +'<circle cx="'+points[points.length-1].x+'" cy="'+points[points.length-1].y+'" r="4" fill="'+lc+'" stroke="var(--bg)" stroke-width="2"/>'
       +'<text x="'+pad+'" y="'+(H+10)+'" fill="var(--txt3)" font-size="9">'+dates[0]+'</text>'
       +'<text x="'+(W-pad)+'" y="'+(H+10)+'" fill="var(--txt3)" font-size="9" text-anchor="end">'+dates[dates.length-1]+'</text>'
       +'</svg></div>';
   });
-  document.getElementById('miniCharts').innerHTML = chartsHtml || '<div style="text-align:center;padding:20px;color:var(--txt3)">Necesitas datos completos para ver los gráficos</div>';
+  document.getElementById('miniCharts').innerHTML=chartsHtml||'<div style="text-align:center;padding:20px;color:var(--txt3)">Necesitas datos completos para ver los gráficos</div>';
 
-  // Table
   var cols=[
     {k:'_date',lbl:'Fecha'},{k:'_phase',lbl:'Fase'},
-    {k:'_btc',lbl:'BTC'},{k:'_dom',lbl:'Dom%'},{k:'_ethbtc',lbl:'ETH/BTC'},
+    {k:'_btc',lbl:'BTC'},{k:'Dom',lbl:'Dom%'},{k:'_ethbtc',lbl:'ETH/BTC'},
     {k:'Alt',lbl:'Alt'},{k:'Fg',lbl:'F&G'},{k:'Bfr',lbl:'BFR'},{k:'Etf',lbl:'ETF M$'}
   ];
   var thead='<thead><tr>'+cols.map(function(c){return '<th>'+c.lbl+'</th>';}).join('')+'</tr></thead>';
@@ -1387,31 +1208,29 @@ function renderHistorial(){
     return '<tr style="'+(i===0?'background:rgba(255,255,255,.02)':'')+'">'+cols.map(function(c){
       var v=h[c.k];
       if(v===undefined||v===null||v==='')return '<td style="color:var(--txt3)">—</td>';
-      if(c.k==='_date'){var d=new Date(v);v=d.getDate()+'/'+(d.getMonth()+1)+'/'+(''+d.getFullYear()).slice(2);}
+      if(c.k==='_date'){var d=new Date(v);v=d.getDate()+'/'+(d.getMonth()+1)+'/'+(d.getFullYear()+'').slice(2);}
       if(c.k==='_phase')return '<td><span style="font-size:8px;font-weight:700;color:'+cfg.color+'">'+cfg.emoji+' '+(cfg.name.split('—')[0].trim())+'</span></td>';
       if(c.k==='_btc'&&v)v='$'+Math.round(v/1000)+'K';
-      if(c.k==='_dom'&&v)v=parseFloat(v).toFixed(1)+'%';
       if(c.k==='_ethbtc'&&v)v=parseFloat(v).toFixed(5);
+      if(c.k==='Dom'&&v)v=parseFloat(v).toFixed(1)+'%';
       return '<td>'+v+'</td>';
     }).join('')+'</tr>';
   }).join('')+'</tbody>';
   document.getElementById('histTable').innerHTML=thead+tbody;
+  renderConfirmation();
 }
 
-// ══════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════
 // INIT
-// ══════════════════════════════════════
-var hdate = document.getElementById('hdate');
-var hday  = document.getElementById('hday');
-var now   = new Date();
-hdate.textContent = now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear();
-hday.textContent  = now.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-
+// ═══════════════════════════════════════════════════════════════
+var now=new Date();
+document.getElementById('hdate').textContent=now.getDate()+'/'+(now.getMonth()+1)+'/'+now.getFullYear();
+document.getElementById('hday').textContent=now.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 initHistory();
 loadData();
 calc();
 fetchAutoData();
-setInterval(fetchAutoData, 60000); // Auto-refresh cada minuto
+setInterval(fetchAutoData,60000);
 </script>
 </body>
 </html>
